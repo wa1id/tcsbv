@@ -3,9 +3,16 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
+  --foreground-rgb: white;
+  --background-start-rgb: 0, 0, 0;
   --background-end-rgb: 255, 255, 255;
+
+  /* Global brand palette */
+  --color-cream: #f3f4e4;
+  --color-orange: #da640e;
+  --color-charcoal: #0e1306;
+  --color-olive: #354e0d;
+  --color-gold: #e2c46f;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,18 +23,11 @@
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
+
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 }
+

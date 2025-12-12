@@ -1,9 +1,21 @@
-import Image from "next/image";
+"use client";
+
+import Hero from "@/components/home/Hero";
+import Services from "@/components/home/Services";
+import CTA from "@/components/home/CTA";
+import FAQ from "@/components/home/FAQ";
+import Footer from "@/components/Footer";
+import Navbar from "../components/Navbar";
 
 export default function Home() {
   return (
-    <div>
-      <h1>Welcome to TCsBV</h1>
-    </div>
+<>
+<Navbar />
+<Hero/>
+<Services/>
+<FAQ/>
+<CTA/>
+<Footer/>
+</>
   );
 }

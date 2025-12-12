@@ -8,6 +8,13 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        cream: "var(--color-cream)",
+        orange: "var(--color-orange)",
+        charcoal: "var(--color-charcoal)",
+        olive: "var(--color-olive)",
+        gold: "var(--color-gold)",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
