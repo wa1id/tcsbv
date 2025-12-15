@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -86,7 +87,7 @@ const Navbar = () => {
     },
     closed: {
       opacity: 0,
-      y: -100,
+      y: 0,
       transition: { duration: 0.3, ease: easeCurve },
       transitionEnd: { display: "none" },
     },
@@ -98,37 +99,37 @@ const Navbar = () => {
   };
 
   const links = [
-    { label: "Home", href: "#home" },
+    { label: "Home", href: "/" },
     {
       label: "Services",
-      href: "#services",
+      href: "/services",
     },
-    { label: "Contact", href: "#contact" },
+    { label: "Contact", href: "/contact" },
   ];
 
-  const cta = { label: "Get in touch", href: "#contact" };
+  const cta = { label: "Get in touch", href: "/contact" };
 
   return (
     <>
       <motion.div
-        className={`flex flex-col justify-center items-center  ease-linear w-full h-[80px] md:h-[80px] transition-all duration-300 fixed top-0 z-50 ${isOpen ? "bg-primary-gray " : "bg-cream"}`}
+        className={`flex flex-col justify-center items-center  ease-linear w-full h-[80px] md:h-[80px] transition-all duration-300 fixed top-0 z-50 ${isOpen ? "bg-charcoal " : "bg-cream"}`}
         animate={{ y: isScrollingUp ? 0 : -100 }}
         initial={{ y: 0 }}
         transition={{ duration: 0.3, ease: easeCurve }}
         style={{
-          backgroundColor: isOpen ? "#151515" : color,
+          backgroundColor: isOpen ? "#0e1306" : color,
           backdropFilter: isOpen ? "none" : `blur(${blurLevel}px)`,
         }}
       >
         <div className="flex justify-between  md:max-w-[1450px] xl:max-w-[1450px] items-center w-full mx-auto px-3">
           <div className="flex-shrink-0">
             <motion.div initial="hidden" animate="visible" variants={textVariants}>
-              <a
+              <Link
                 href="/"
                 className="text-2xl font-[700] text-orange hover:text-orange/90"
                 style={{ color: textColor }}
               >TCsBV
-              </a>
+              </Link>
             </motion.div>
           </div>
 
@@ -143,14 +144,14 @@ const Navbar = () => {
                   transition={{ delay: 0.15 * index }}
                   className="relative group"
                 >
-                  <a href={link.href} className="hover:text-orange/90 transition-colors">
+                  <Link href={link.href} className="hover:text-orange/90 transition-colors">
                     {link.label}
-                  </a>
+                  </Link>
                 </motion.div>
               ))}
               <a
                 href={cta.href}
-                className="ml-4 hover:bg-olive rounded-full bg-orange px-8 py-4 text-sm font-semibold text-cream transition hover:bg-orange/90"
+                className="ml-4 hover:bg-olive ease-linear duration-100 transition-all rounded-full bg-orange px-8 py-4 text-sm font-semibold text-cream transition hover:bg-orange/90"
               >
                 {cta.label}
               </a>
@@ -160,13 +161,13 @@ const Navbar = () => {
           <motion.div initial="hidden" animate="visible" variants={textVariants} className="lg:hidden">
             <button onClick={toggleMenu} className="focus:outline-none h-[20px] flex flex-col justify-center items-center gap-y-2">
               <div
-                className={`w-10 h-[1px] rounded-full mt-[1px] transition-all duration-300 ${isOpen ? "bg-primary-orange rotate-45 translate-y-[0.4rem]" : "bg-orange"}`}
+                className={`w-10 h-[1px] rounded-full mt-[1px] transition-all duration-300 ${isOpen ? "bg-orange rotate-45 translate-y-[0.4rem]" : "bg-charcoal"}`}
               />
               <div
-                className={`w-10 h-[1px] rounded-full transition-all duration-300 ${isOpen ? "bg-primary-orange translate-x-full opacity-0" : "bg-orange"}`}
+                className={`w-10 h-[1px] rounded-full transition-all duration-300 ${isOpen ? "bg-orange translate-x-full opacity-0" : "bg-charcoal"}`}
               />
               <div
-                className={`w-10 h-[1px] rounded-full mt-[1px] transition-all duration-300 ${isOpen ? "bg-primary-orange -rotate-45 -translate-y-[0.75rem]" : "bg-orange"}`}
+                className={`w-10 h-[1px] rounded-full mt-[1px] transition-all duration-300 ${isOpen ? "bg-orange -rotate-45 -translate-y-[0.75rem]" : "bg-charcoal"}`}
               />
             </button>
           </motion.div>
@@ -177,9 +178,9 @@ const Navbar = () => {
         initial="closed"
         animate={isOpen ? "open" : "closed"}
         variants={menuVariants}
-        className="lg:hidden fixed top-20 left-0 w-full h-full z-30 flex items-center justify-center"
+        className="lg:hidden bg-charcoal fixed top-20 left-0 w-full h-full z-30 flex items-center justify-center"
       >
-        <nav className="space-y-8 text-left text-orange px-3 pt-6">
+        <nav className="space-y-8 text-left text-orange px-4 pt-6">
           {links.map((link, index) => (
             <motion.div
               key={link.label}
@@ -189,15 +190,15 @@ const Navbar = () => {
               transition={{ delay: 0.2 * index }}
               onClick={() => setIsOpen(false)}
             >
-              <a href={link.href} className="text-2xl font-[700] hover:text-gray-700 transition-colors">
+              <Link href={link.href} className="text-2xl font-[500] hover:text-gray-700 transition-colors">
                 {link.label}
-              </a>
+              </Link>
               
             </motion.div>
           ))}
           <a
             href={cta.href}
-            className="inline-block rounded-full bg-orange px-5 py-4 text-lg font-semibold text-orange transition hover:bg-gray-200"
+            className="inline-block rounded-full bg-orange px-5 w-full text-center text-cream py-4 text-lg font-semibold  transition hover:bg-olive"
             onClick={() => setIsOpen(false)}
           >
             {cta.label}

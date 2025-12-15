@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import React from "react";
+import Link from "next/link";
 
 const CTA = () => {
     const features = [
@@ -14,7 +15,7 @@ const CTA = () => {
                     alt="Engine performance"
                     width={48}
                     height={48}
-                    className="w-16 h-16"
+                    className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16"
                 />
             ),
             title: "Engine performance",
@@ -28,7 +29,7 @@ const CTA = () => {
                     alt="Detailed diagnostic"
                     width={48}
                     height={48}
-                    className="w-16 h-16"
+                    className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16"
                 />
             ),
             title: "Detailed diagnostic",
@@ -42,7 +43,7 @@ const CTA = () => {
                     alt="Reasonable price"
                     width={48}
                     height={48}
-                    className="w-16 h-16"
+                    className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16"
                 />
             ),
             title: "Reasonable price",
@@ -81,10 +82,10 @@ const CTA = () => {
     };
 
     return (
-        <div ref={containerRef} className="relative mt-40 w-full">
+        <div ref={containerRef} className="relative mt-20 sm:mt-32 md:mt-40 w-full">
             {/* Feature Cards Section - Top */}
-            <div className="absolute top-[-12rem] left-0 right-0 z-10 max-w-[1080px] mx-auto px-4 md:px-8 lg:px-12 pt-12 md:pt-16 lg:pt-20">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+            <div className="relative lg:absolute top-0 lg:top-[-12rem] left-0 right-0 z-10 max-w-[1080px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-8 sm:pt-12 md:pt-16 lg:pt-20 mb-8 lg:mb-0">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
                     {features.map((feature, index) => (
                         <motion.div
                             key={feature.id}
@@ -92,13 +93,13 @@ const CTA = () => {
                             variants={cardVariants}
                             initial="hidden"
                             animate={isInView ? "visible" : "hidden"}
-                            className="bg-orange rounded-xl px-6 md:px-8  pt-10 pb-14 shadow-lg hover:shadow-xl transition-shadow duration-300"
+                            className="bg-orange rounded-xl px-5 sm:px-6 md:px-8 pt-8 sm:pt-10 pb-10 sm:pb-12 md:pb-14 shadow-lg hover:shadow-xl transition-shadow duration-300"
                         >
-                            <div className="text-orange mb-4">{feature.icon}</div>
-                            <h3 className=" text-xl text-cream md:text-2xl font-semibold mb-2">
+                            <div className="text-orange mb-3 sm:mb-4">{feature.icon}</div>
+                            <h3 className="text-lg sm:text-xl md:text-2xl text-cream font-semibold mb-2">
                                 {feature.title}
                             </h3>
-                            <p className="text-cream text-sm md:text-base">
+                            <p className="text-cream text-xs sm:text-sm md:text-base">
                                 {feature.description}
                             </p>
                         </motion.div>
@@ -109,7 +110,7 @@ const CTA = () => {
             {/* Hero Section with Background Image */}
             <div
                 ref={heroRef}
-                className="relative w-full h-[600px] mt-8 md:mt-12"
+                className="relative w-full h-[400px] sm:h-[500px] md:h-[550px] lg:h-[600px] mt-0 lg:mt-8 md:mt-12"
             >
                 {/* Background Image */}
                 <div className="absolute inset-0">
@@ -129,37 +130,39 @@ const CTA = () => {
                     variants={heroVariants}
                     initial="hidden"
                     animate={isHeroInView ? "visible" : "hidden"}
-                    className="relative z-10 h-full flex items-center justify-center max-w-[1450px] mx-auto px-4 md:px-8 lg:px-12"
+                    className="relative z-10 h-full flex items-center justify-center max-w-[1450px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12"
                 >
-                    <div className="max-w-2xl text-center mt-16">
+                    <div className="max-w-2xl text-center mt-8 sm:mt-12 lg:mt-16 px-2">
                         {/* Main Heading */}
-                        <h2 className="text-orange text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
+                        <h2 className="text-orange text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-4 leading-tight">
                             We strive for excellence in everything we do.
                         </h2>
 
                         {/* Sub-text */}
-                        <p className="text-cream text-lg md:text-xl mb-8 text-center">
+                        <p className="text-cream text-sm sm:text-base md:text-lg lg :text-xl mb-6 sm:mb-8 text-center">
                             Massa euismod laoreet faucibus cras non amet.
                         </p>
 
                         {/* CTA Buttons */}
-                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                            <button className="bg-cream hover:bg-cream/90 text-charcoal px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-300 shadow-lg hover:shadow-xl">
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+                            <Link href={"/contact"}>
+                            <button className="bg-cream hover:bg-cream/90 text-charcoal px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg transition-colors duration-300 shadow-lg hover:shadow-xl w-full sm:w-auto">
                                 Need a car inspection?
                             </button>
+                            </Link>
                             <a
                                 href="#faq"
-                                className="flex items-center gap-2 text-cream hover:text-gold transition-colors duration-300 group"
+                                className="flex items-center justify-center gap-2 text-cream hover:text-gold transition-colors duration-300 group"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="currentColor"
                                     viewBox="0 0 24 24"
-                                    className="w-5 h-5 group-hover:scale-110 transition-transform"
+                                    className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform"
                                 >
                                     <path d="M8 5v14l11-7z" />
                                 </svg>
-                                <span className="text-base md:text-lg font-medium">
+                                <span className="text-sm sm:text-base md:text-lg font-medium">
                                     Frequently asked questions
                                 </span>
                             </a>

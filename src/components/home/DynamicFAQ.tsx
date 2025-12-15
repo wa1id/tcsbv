@@ -3,33 +3,27 @@
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import React, { useState } from "react";
+import { PortableText } from '@portabletext/react';
 
-interface FAQItem {
-    id: number;
+interface FAQ {
+    _id: string;
     question: string;
-    answer: string;
+    answer: any[]; // Portable Text array
+    category: string;
+    order: number;
+    featured: boolean;
 }
 
-const FAQ = () => {
+interface DynamicFAQProps {
+    faqs: FAQ[];
+}
+
+const DynamicFAQ = ({ faqs }: DynamicFAQProps) => {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-    const faqItems: FAQItem[] = [
-        {
-            id: 1,
-            question: "Curabitur non nulla sit amet nisl tempus?",
-            answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-        },
-        {
-            id: 2,
-            question: "Quisque velit nisi pretium ut lacinia in?",
-            answer: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        },
-        {
-            id: 3,
-            question: "Quam at scelerisque in velit nisl ultrices neque fames?",
-            answer: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-        },
-    ];
+    // Take only featured FAQs or first 3 if no featured ones
+    const featuredFaqs = faqs.filter(faq => faq.featured);
+    const displayFaqs = featuredFaqs.length > 0 ? featuredFaqs.slice(0, 3) : faqs.slice(0, 3);
 
     const stats = [
         {
@@ -113,17 +107,26 @@ const FAQ = () => {
         },
     };
 
+    // Portable Text components for rendering rich text
+    const portableTextComponents = {
+        block: {
+            normal: ({ children }: any) => (
+                <p className="text-sm md:text-base text-charcoal/70 leading-relaxed">
+                    {children}
+                </p>
+            ),
+        },
+    };
+
     return (
         <div
             ref={containerRef}
             id="faq"
-            className="w-full pt-20 pb-10 md:py-28 lg:py-32 px-4 md:px-8 lg:px-12"
+            className="w-full pt-20 md:py-28 lg:py-32 px-4 md:px-8 lg:px-12"
         >
             <div className="max-w-[1450px] mx-auto">
                 {/* FAQ Section with Image and FAQ Side by Side */}
                 <div className="mb-20 md:mb-24 lg:mb-32">
-                  
-
                     {/* Image and FAQ Grid Layout */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
                         {/* Left Side - Image */}
@@ -145,29 +148,30 @@ const FAQ = () => {
 
                         {/* Right Side - FAQ Items */}
                         <div className="space-y-4 md:space-y-5">
-                              {/* Title Section */}
-                    <motion.div
-                        ref={titleRef}
-                        variants={titleVariants}
-                        initial="hidden"
-                        animate={isTitleInView ? "visible" : "hidden"}
-                        className=" md:mb-10"
-                    >
-                        <h2 className="text-4xl font-bold text-charcoal mb-4">
-                            Frequently asked{" "}
-                            <span className="relative inline-block">
-                                questions
-                                <span className="absolute bottom-1 left-0 right-0 h-2 bg-orange -z-10 transform -skew-y-[-1deg]"></span>
-                            </span>
-                            .
-                        </h2>
-                        <p className="text-lg md:text-xl text-charcoal/70 max-w-2xl">
-                            Malesuada velit et ut malesuada amet tempor velit dui. Nullam amet commodo gravida gravida.
-                        </p>
-                    </motion.div>
-                            {faqItems.map((item, index) => (
+                            {/* Title Section */}
+                            <motion.div
+                                ref={titleRef}
+                                variants={titleVariants}
+                                initial="hidden"
+                                animate={isTitleInView ? "visible" : "hidden"}
+                                className="md:mb-10"
+                            >
+                                <h2 className="text-4xl font-bold text-charcoal mb-4">
+                                    Frequently asked{" "}
+                                    <span className="relative inline-block">
+                                        questions
+                                        <span className="absolute bottom-1 left-0 right-0 h-2 bg-orange -z-10 transform -skew-y-[-1deg]"></span>
+                                    </span>
+                                    .
+                                </h2>
+                                <p className="text-lg md:text-xl text-charcoal/70 max-w-2xl">
+                                    Find answers to common questions about our automotive services and expertise.
+                                </p>
+                            </motion.div>
+
+                            {displayFaqs.map((item, index) => (
                                 <motion.div
-                                    key={item.id}
+                                    key={item._id}
                                     custom={index}
                                     variants={faqVariants}
                                     initial="hidden"
@@ -176,10 +180,10 @@ const FAQ = () => {
                                 >
                                     <button
                                         onClick={() => toggleFAQ(index)}
-                                        className="w-full flex items-center gap-4 md:gap-6 p-5 md:p-6 text-left focus:outline-none  rounded-lg"
+                                        className="w-full flex items-center gap-4 md:gap-6 p-5 md:p-6 text-left focus:outline-none rounded-lg"
                                         aria-expanded={openIndex === index}
                                     >
-                                        {/* Blue Square Icon with Plus */}
+                                        {/* Orange Square Icon with Plus */}
                                         <div className="flex-shrink-0">
                                             <div
                                                 className={`w-12 h-12 md:w-14 md:h-14 rounded-lg flex items-center justify-center transition-all duration-300 ${
@@ -227,9 +231,10 @@ const FAQ = () => {
                                         className="overflow-hidden"
                                     >
                                         <div className="px-5 md:px-6 pb-5 md:pb-6 ml-20 md:ml-24">
-                                            <p className="text-sm md:text-base text-charcoal/70 leading-relaxed">
-                                                {item.answer}
-                                            </p>
+                                            <PortableText 
+                                                value={item.answer} 
+                                                components={portableTextComponents}
+                                            />
                                         </div>
                                     </motion.div>
                                 </motion.div>
@@ -243,7 +248,7 @@ const FAQ = () => {
                     ref={statsRef}
                     initial="hidden"
                     animate={isStatsInView ? "visible" : "hidden"}
-                    className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 lg:gap-12 pt-12  md:pt-16 border-t border-charcoal/10"
+                    className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 lg:gap-12 pt-12 md:pt-16 border-t border-charcoal/10"
                 >
                     {stats.map((stat, index) => (
                         <motion.div
@@ -266,5 +271,4 @@ const FAQ = () => {
     );
 };
 
-export default FAQ;
-
+export default DynamicFAQ;

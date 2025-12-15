@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import React from "react";
+import Link from "next/link";
 
 const Services = () => {
     const services = [
@@ -64,7 +65,7 @@ const Services = () => {
                 <div className="text-center mb-12 md:mb-16 lg:mb-20">
                     <motion.h2
                         ref={headingRef}
-                        className="text-4xl md:text-5xl lg:text-6xl font-bold text-orange mb-4"
+                        className="text-3xl md:text-5xl lg:text-6xl font-bold text-orange mb-4"
                         variants={textVariants}
                         initial="hidden"
                         animate={isHeadingInView ? "visible" : "hidden"}
@@ -73,7 +74,7 @@ const Services = () => {
                     </motion.h2>
                     <motion.p
                         ref={textRef}
-                        className="text-lg md:text-xl text-charcoal/70 max-w-2xl mx-auto"
+                        className=" md:text-xl text-charcoal max-w-2xl mx-auto"
                         variants={textVariants}
                         initial="hidden"
                         animate={isTextInView ? "visible" : "hidden"}
@@ -91,7 +92,7 @@ const Services = () => {
                             variants={cardVariants}
                             initial="hidden"
                             animate={isInView ? "visible" : "hidden"}
-                            className="relative h-[500px] md:h-[600px] rounded-2xl overflow-hidden group cursor-pointer"
+                            className="relative h-[500px] md:h-[600px] rounded-2xl overflow-hidden group"
                         >
                             {/* Background Image */}
                             <Image
@@ -117,9 +118,17 @@ const Services = () => {
                                 </h3>
 
                                 {/* Description */}
-                                <p className="text-white/90 text-sm md:text-base leading-relaxed max-w-md">
+                                <p className="text-white/90 text-sm md:text-base leading-relaxed max-w-md mb-4">
                                     {service.description}
                                 </p>
+
+                                {/* Button */}
+                                <Link
+                                    href={`/services/${service.id}`}
+                                    className="inline-block hover:bg-olive ease-in  bg-orange  text-cream px-8 py-3 rounded-full font-semibold text-sm md:text-base transition-colors duration-300 mt-4"
+                                >
+                                    View Details
+                                </Link>
                             </div>
                         </motion.div>
                     ))}

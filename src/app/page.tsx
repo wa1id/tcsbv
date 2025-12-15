@@ -1,21 +1,35 @@
-"use client";
-
 import Hero from "@/components/home/Hero";
-import Services from "@/components/home/Services";
+import DynamicServices from "@/components/home/DynamicServices";
+import Testimonials from "@/components/home/Testimonials";
 import CTA from "@/components/home/CTA";
-import FAQ from "@/components/home/FAQ";
-import Footer from "@/components/Footer";
-import Navbar from "../components/Navbar";
+import DynamicFAQ from "@/components/home/DynamicFAQ";
+import DynamicFooter from "@/components/DynamicFooter";
+import DynamicNavbar from "@/components/DynamicNavbar";
+import {
+  getSiteSettings,
+  getServices,
+  getFaqs,
+  getNavigation,
+} from "@/sanity/lib/fetch";
 
-export default function Home() {
+export default async function Home() {
+  // Fetch data from Sanity with fallbacks
+  const [siteSettings, services, faqs, navigation] = await Promise.all([
+    getSiteSettings(),
+    getServices(),
+    getFaqs(),
+    getNavigation(),
+  ]);
+
   return (
-<>
-<Navbar />
-<Hero/>
-<Services/>
-<FAQ/>
-<CTA/>
-<Footer/>
-</>
+    <>
+      <DynamicNavbar siteSettings={siteSettings} navigation={navigation} />
+      <Hero />
+      <DynamicServices services={services} />
+      <Testimonials />
+      <DynamicFAQ faqs={faqs} />
+      <CTA />
+      <DynamicFooter siteSettings={siteSettings} />
+    </>
   );
 }
