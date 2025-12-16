@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "studio:deploy": "sanity deploy"
+    "studio:deploy": "sanity deploy --source-maps"
   },
   "dependencies": {
     "@portabletext/react": "^6.0.0",
