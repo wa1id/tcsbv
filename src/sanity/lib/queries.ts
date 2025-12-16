@@ -92,6 +92,57 @@ export const pageQuery = groq`
   }
 `
 
+// All Testimonials Query
+export const testimonialsQuery = groq`
+  *[_type == "testimonial"] | order(dateGiven desc, _createdAt desc) {
+    _id,
+    name,
+    company,
+    position,
+    content,
+    rating,
+    image,
+    featured,
+    dateGiven,
+    service->{
+      title,
+      slug
+    }
+  }
+`
+
+// Featured Testimonials Query
+export const featuredTestimonialsQuery = groq`
+  *[_type == "testimonial" && featured == true] | order(dateGiven desc, _createdAt desc) {
+    _id,
+    name,
+    company,
+    position,
+    content,
+    rating,
+    image,
+    dateGiven,
+    service->{
+      title,
+      slug
+    }
+  }
+`
+
+// Testimonials by Service Query
+export const testimonialsByServiceQuery = groq`
+  *[_type == "testimonial" && service._ref == $serviceId] | order(dateGiven desc, _createdAt desc) {
+    _id,
+    name,
+    company,
+    position,
+    content,
+    rating,
+    image,
+    dateGiven
+  }
+`
+
 // Navigation Links Query (for dynamic navigation)
 export const navigationQuery = groq`
   {

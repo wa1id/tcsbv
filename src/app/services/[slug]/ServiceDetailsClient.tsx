@@ -6,6 +6,7 @@ import React from "react";
 import Link from "next/link";
 import DynamicFooter from "@/components/DynamicFooter";
 import FAQ from "@/components/home/FAQ";
+import TestimonialCard from "@/components/TestimonialCard";
 import { urlFor } from "@/sanity/lib/image";
 
 interface Service {
@@ -38,12 +39,24 @@ interface SiteSettings {
     [key: string]: any;
 }
 
+interface Testimonial {
+    _id: string;
+    name: string;
+    company?: string;
+    position?: string;
+    content: string;
+    rating: number;
+    image?: any;
+    dateGiven?: string;
+}
+
 interface ServiceDetailsClientProps {
     service: Service;
     siteSettings: SiteSettings;
+    testimonials?: Testimonial[];
 }
 
-const ServiceDetailsClient = ({ service, siteSettings }: ServiceDetailsClientProps) => {
+const ServiceDetailsClient = ({ service, siteSettings, testimonials = [] }: ServiceDetailsClientProps) => {
     const containerRef = React.useRef(null);
     const heroRef = React.useRef(null);
     const contentRef = React.useRef(null);
@@ -224,6 +237,32 @@ const ServiceDetailsClient = ({ service, siteSettings }: ServiceDetailsClientPro
                     </motion.div>
                 </div>
             </div>
+
+            {/* Service Testimonials Section */}
+            {testimonials && testimonials.length > 0 && (
+                <div className="w-full py-20 px-4 md:px-8 lg:px-12 bg-white">
+                    <div className="max-w-[1450px] mx-auto">
+                        <div className="text-center mb-16">
+                            <h2 className="text-charcoal text-4xl md:text-5xl font-bold mb-6">
+                                What Our Customers Say About {service.title}
+                            </h2>
+                            <p className="text-charcoal/70 text-lg md:text-xl max-w-3xl mx-auto">
+                                Real feedback from customers who have used our {service.title.toLowerCase()} service
+                            </p>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                            {testimonials.map((testimonial) => (
+                                <TestimonialCard 
+                                    key={testimonial._id} 
+                                    testimonial={testimonial}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            )}
+
             <FAQ />
             <DynamicFooter siteSettings={siteSettings} />
         </>

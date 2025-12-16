@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getSiteSettings, getService, getServices, getNavigation } from '@/sanity/lib/fetch';
+import { getSiteSettings, getService, getServices, getNavigation, getTestimonialsByService } from '@/sanity/lib/fetch';
 import { generateSEO, generateStructuredData } from '@/lib/seo';
 import DynamicNavbar from '@/components/DynamicNavbar';
 import ServiceDetailsClient from './ServiceDetailsClient';
@@ -50,6 +50,9 @@ export default async function ServicePage({ params }: ServicePageProps) {
     notFound();
   }
 
+  // Get testimonials for this service
+  const testimonials = await getTestimonialsByService(service._id);
+
   const serviceSchema = generateStructuredData('Service', service, siteSettings);
 
   return (
@@ -61,7 +64,11 @@ export default async function ServicePage({ params }: ServicePageProps) {
         }}
       />
       <DynamicNavbar siteSettings={siteSettings} navigation={navigation} />
-      <ServiceDetailsClient service={service} siteSettings={siteSettings} />
+      <ServiceDetailsClient 
+        service={service} 
+        siteSettings={siteSettings} 
+        testimonials={testimonials}
+      />
     </>
   );
 }

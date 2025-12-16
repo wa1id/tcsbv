@@ -32,4 +32,10 @@ export const structure: StructureResolver = (S) =>
         .title("FAQs")
         .schemaType("faq")
         .child(S.documentTypeList("faq").title("FAQs")),
+
+      // Testimonials
+      S.listItem()
+        .title("Testimonials")
+        .schemaType("testimonial")
+        .child(S.documentTypeList("testimonial").title("Testimonials")),
     ]);

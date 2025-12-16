@@ -7,7 +7,10 @@ import {
   featuredFaqsQuery,
   pagesQuery,
   pageQuery,
-  navigationQuery
+  navigationQuery,
+  testimonialsQuery,
+  featuredTestimonialsQuery,
+  testimonialsByServiceQuery
 } from './queries'
 
 // Fallback data for when Sanity is empty
@@ -88,6 +91,38 @@ export const fallbackData = {
       category: 'general',
       order: 3,
       featured: false
+    }
+  ],
+  testimonials: [
+    {
+      _id: 'testimonial-1',
+      name: 'Sarah Johnson',
+      company: 'Johnson Enterprises',
+      position: 'Business Owner',
+      content: 'Exceptional service! They diagnosed my car\'s issue quickly and fixed it at a fair price. The team was professional and kept me informed throughout the process.',
+      rating: 5,
+      featured: true,
+      dateGiven: '2024-01-15'
+    },
+    {
+      _id: 'testimonial-2',
+      name: 'Michael Chen',
+      company: 'Tech Solutions Inc',
+      position: 'Software Engineer',
+      content: 'I\'ve been bringing my car here for years. Their attention to detail and honest approach to repairs makes them my go-to automotive service provider.',
+      rating: 5,
+      featured: true,
+      dateGiven: '2024-02-20'
+    },
+    {
+      _id: 'testimonial-3',
+      name: 'Emily Rodriguez',
+      company: 'Marketing Pro',
+      position: 'Marketing Manager',
+      content: 'Outstanding customer service and quality work. They went above and beyond to ensure my car was running perfectly. Highly recommend!',
+      rating: 5,
+      featured: true,
+      dateGiven: '2024-03-10'
     }
   ]
 }
@@ -178,5 +213,38 @@ export async function getNavigation() {
   } catch (error) {
     console.warn('Failed to fetch navigation from Sanity:', error)
     return { pages: [], services: [] }
+  }
+}
+
+export async function getTestimonials() {
+  try {
+    const data = await client.fetch(testimonialsQuery)
+    return data.length > 0 ? data : fallbackData.testimonials
+  } catch (error) {
+    console.warn('Failed to fetch testimonials from Sanity, using fallback data:', error)
+    return fallbackData.testimonials
+  }
+}
+
+export async function getFeaturedTestimonials() {
+  try {
+    const data = await client.fetch(featuredTestimonialsQuery)
+    if (data.length > 0) return data
+    
+    // Return featured testimonials from fallback data
+    return fallbackData.testimonials.filter(testimonial => testimonial.featured)
+  } catch (error) {
+    console.warn('Failed to fetch featured testimonials from Sanity, using fallback data:', error)
+    return fallbackData.testimonials.filter(testimonial => testimonial.featured)
+  }
+}
+
+export async function getTestimonialsByService(serviceId: string) {
+  try {
+    const data = await client.fetch(testimonialsByServiceQuery, { serviceId })
+    return data || []
+  } catch (error) {
+    console.warn('Failed to fetch testimonials by service from Sanity:', error)
+    return []
   }
 }
