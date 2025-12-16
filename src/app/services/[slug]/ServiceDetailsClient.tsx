@@ -169,7 +169,7 @@ const ServiceDetailsClient = ({ service, siteSettings }: ServiceDetailsClientPro
             {/* Content Section with H2, Description, and Image */}
             <div
                 ref={containerRef}
-                className="min-h-screen w-full py-20 px-4 md:px-8 lg:px-12 bg-cream"
+                className="w-full py-20 px-4 md:px-8 lg:px-12 bg-cream"
             >
                 <div className="max-w-[1450px] mx-auto w-full">
                     <motion.div
