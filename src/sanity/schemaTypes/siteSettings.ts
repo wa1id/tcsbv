@@ -85,6 +85,55 @@ export const siteSettings = defineType({
       ],
     }),
     defineField({
+      name: 'heroSection',
+      title: 'Hero Section',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'title',
+          title: 'Hero Title',
+          type: 'string',
+        }),
+        defineField({
+          name: 'subtitle',
+          title: 'Hero Subtitle',
+          type: 'text',
+          rows: 2,
+        }),
+        defineField({
+          name: 'description',
+          title: 'Hero Description',
+          type: 'text',
+          rows: 3,
+        }),
+        defineField({
+          name: 'backgroundImage',
+          title: 'Background Image',
+          type: 'image',
+          options: {
+            hotspot: true,
+          },
+        }),
+        defineField({
+          name: 'ctaButton',
+          title: 'Call to Action Button',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'text',
+              title: 'Button Text',
+              type: 'string',
+            }),
+            defineField({
+              name: 'url',
+              title: 'Button URL',
+              type: 'url',
+            }),
+          ],
+        }),
+      ],
+    }),
+    defineField({
       name: 'seo',
       title: 'Default SEO Settings',
       type: 'object',

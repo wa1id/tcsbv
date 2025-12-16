@@ -4,7 +4,8 @@ import { page } from "./page";
 import { service } from "./service";
 import { faq } from "./faq";
 import { testimonial } from "./testimonial";
+import { hero } from "./hero";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [siteSettings, page, service, faq, testimonial],
+  types: [siteSettings, page, service, faq, testimonial, hero],
 };
