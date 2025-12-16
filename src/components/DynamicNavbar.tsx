@@ -260,12 +260,12 @@ const DynamicNavbar = ({ siteSettings, navigation }: NavbarProps) => {
                   </motion.div>
                 </motion.div>
               )}
-              <a
+              <Link
                 href={cta.href}
                 className="ml-4 hover:bg-olive ease-linear duration-100 transition-all rounded-full bg-orange px-8 py-4 text-sm font-semibold text-cream hover:bg-orange/90"
               >
                 {cta.label}
-              </a>
+              </Link>
             </nav>
           </div>
 

@@ -168,13 +168,13 @@ const DynamicTestimonials: React.FC<DynamicTestimonialsProps> = ({ testimonials 
                                 </div>
 
                                 {/* Service Badge (if linked to a service) */}
-                                {testimonial.service && (
+                                {/* {testimonial.service && (
                                     <div className="absolute top-6 left-6">
                                         <span className="inline-block bg-orange/10 text-orange text-xs font-medium px-2 py-1 rounded-full">
                                             {testimonial.service.title}
                                         </span>
                                     </div>
-                                )}
+                                )} */}
 
                                 {/* Hover Effect Line */}
                                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-orange to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-b-2xl" />
