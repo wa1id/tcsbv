@@ -12,18 +12,53 @@ interface PageProps {
 }
 
 async function getPage(slug: string) {
-  const query = `
-    *[_type == "page" && slug.current == $slug][0] {
-      _id,
-      title,
-      slug,
-      pageBuilder,
-      seo,
-      pageType
-    }
-  `
-  
-  return await client.fetch(query, { slug })
+  try {
+    const query = `
+      *[_type == "page" && slug.current == $slug][0] {
+        _id,
+        title,
+        slug,
+        pageBuilder[] {
+          _type,
+          _key,
+          ...,
+          services[]-> {
+            _id,
+            title,
+            description,
+            price,
+            features,
+            slug
+          },
+          testimonials[]-> {
+            _id,
+            name,
+            company,
+            position,
+            content,
+            rating,
+            image
+          },
+          faqs[]-> {
+            _id,
+            question,
+            answer,
+            category,
+            order
+          }
+        },
+        seo,
+        pageType
+      }
+    `
+    
+    const result = await client.fetch(query, { slug })
+    console.log('Query result for slug', slug, ':', result)
+    return result
+  } catch (error) {
+    console.error('Error fetching page:', error)
+    return null
+  }
 }
 
 export default async function DynamicPage({ params }: PageProps) {

@@ -10,7 +10,35 @@ async function getHomePage() {
       _id,
       title,
       slug,
-      pageBuilder,
+      pageBuilder[] {
+        _type,
+        _key,
+        ...,
+        services[]-> {
+          _id,
+          title,
+          description,
+          price,
+          features,
+          slug
+        },
+        testimonials[]-> {
+          _id,
+          name,
+          company,
+          position,
+          content,
+          rating,
+          image
+        },
+        faqs[]-> {
+          _id,
+          question,
+          answer,
+          category,
+          order
+        }
+      },
       seo
     }
   `
