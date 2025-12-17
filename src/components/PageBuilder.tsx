@@ -4,9 +4,9 @@ import React from "react";
 import HeroBlock from "./blocks/HeroBlock";
 import HomeHeroBlock from "./blocks/HomeHeroBlock";
 import HomeCTABlock from "./blocks/HomeCTABlock";
-import ServicesBlock from "./blocks/ServicesBlock";
-import TestimonialsBlock from "./blocks/TestimonialsBlock";
-import FAQBlock from "./blocks/FAQBlock";
+import DynamicServices from "./home/DynamicServices";
+import DynamicTestimonials from "./home/DynamicTestimonials";
+import DynamicFAQ from "./home/DynamicFAQ";
 import TextBlock from "./blocks/TextBlock";
 import ContactFormBlock from "./blocks/ContactFormBlock";
 
@@ -43,13 +43,13 @@ const PageBuilder = ({ blocks, siteSettings }: PageBuilderProps) => {
         return <ContactFormBlock key={index} data={block} siteSettings={siteSettings} />;
       
       case 'servicesBlock':
-        return <ServicesBlock key={index} data={block} />;
+        return <DynamicServices key={index} services={block.services || []} />;
       
       case 'testimonialsBlock':
-        return <TestimonialsBlock key={index} data={block} />;
+        return <DynamicTestimonials key={index} testimonials={block.testimonials || []} />;
       
       case 'faqBlock':
-        return <FAQBlock key={index} data={block} />;
+        return <DynamicFAQ key={index} faqs={block.faqs || []} />;
       
       default:
         console.warn(`Unknown block type: ${block._type}`);

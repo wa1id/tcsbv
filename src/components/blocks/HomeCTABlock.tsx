@@ -79,7 +79,22 @@ const HomeCTABlock = ({ data }: HomeCTABlockProps) => {
                     className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16"
                   />
                 ) : (
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-cream rounded-lg" />
+                  // Use existing icons from public folder based on title
+                  <Image
+                    src={
+                      feature.title.toLowerCase().includes('engine') || feature.title.toLowerCase().includes('performance') 
+                        ? "/motor-white.png"
+                        : feature.title.toLowerCase().includes('diagnostic')
+                        ? "/diagnostic-white.png"
+                        : feature.title.toLowerCase().includes('price') || feature.title.toLowerCase().includes('reasonable')
+                        ? "/tag.png"
+                        : "/motor-white.png" // default fallback
+                    }
+                    alt={feature.title}
+                    width={48}
+                    height={48}
+                    className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16"
+                  />
                 )}
               </div>
               <h3 className="text-lg sm:text-xl md:text-2xl text-cream font-semibold mb-2">

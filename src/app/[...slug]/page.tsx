@@ -6,9 +6,9 @@ import PageBuilder from '@/components/PageBuilder'
 import { getSiteSettings, getNavigation } from "@/sanity/lib/fetch";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     slug: string[]
-  }
+  }>
 }
 
 async function getPage(slug: string) {
@@ -52,8 +52,14 @@ async function getPage(slug: string) {
       }
     `
     
+    console.log('Searching for page with slug:', slug)
     const result = await client.fetch(query, { slug })
     console.log('Query result for slug', slug, ':', result)
+    
+    // Also try to fetch all pages to see what exists
+    const allPages = await client.fetch(`*[_type == "page"] { title, slug, isHomePage }`)
+    console.log('All pages in Sanity:', allPages)
+    
     return result
   } catch (error) {
     console.error('Error fetching page:', error)
@@ -62,10 +68,12 @@ async function getPage(slug: string) {
 }
 
 export default async function DynamicPage({ params }: PageProps) {
+  // Await params in Next.js 15+
+  const resolvedParams = await params
   // Join the slug array to handle nested routes
-  const slug = params.slug?.join('/') || ''
+  const slug = resolvedParams.slug?.join('/') || ''
   
-  console.log('Dynamic page slug:', slug, 'params:', params)
+  console.log('Dynamic page slug:', slug, 'params:', resolvedParams)
   
   const [page, siteSettings, navigation] = await Promise.all([
     getPage(slug),
@@ -107,7 +115,8 @@ export async function generateStaticParams() {
 
 // Generate metadata for SEO
 export async function generateMetadata({ params }: PageProps) {
-  const slug = params.slug.join('/')
+  const resolvedParams = await params
+  const slug = resolvedParams.slug?.join('/') || ''
   const page = await getPage(slug)
   
   if (!page) {
