@@ -14,6 +14,18 @@ async function getHomePage() {
         _type,
         _key,
         ...,
+        ctaButton {
+          ...,
+          internalLink-> {
+            slug
+          }
+        },
+        ctaButtons[] {
+          ...,
+          internalLink-> {
+            slug
+          }
+        },
         services[]-> {
           _id,
           title,
@@ -53,11 +65,7 @@ export default async function Home() {
     getNavigation()
   ])
 
-  console.log('Home page data:', page)
-  console.log('Page builder blocks:', page?.pageBuilder)
-
   if (!page) {
-    console.log('No home page found in Sanity')
     // Fallback: show message to create home page in Sanity
     return (
       <>
@@ -84,7 +92,7 @@ export default async function Home() {
   return (
     <>
       <DynamicNavbar siteSettings={siteSettings} navigation={navigation} />
-      <main className="min-h-screen">
+      <main className="">
         <PageBuilder blocks={page.pageBuilder || []} siteSettings={siteSettings} />
       </main>
       <DynamicFooter siteSettings={siteSettings} />

@@ -16,15 +16,10 @@ interface PageBuilderProps {
 }
 
 const PageBuilder = ({ blocks, siteSettings }: PageBuilderProps) => {
-  console.log('PageBuilder received blocks:', blocks)
-  
   const renderBlock = (block: any, index: number) => {
     if (!block || !block._type) {
-      console.warn('Invalid block at index', index, block)
       return null
     }
-
-    console.log('Rendering block:', block._type, block)
 
     switch (block._type) {
       case 'heroBlock':
@@ -52,7 +47,6 @@ const PageBuilder = ({ blocks, siteSettings }: PageBuilderProps) => {
         return <DynamicFAQ key={index} faqs={block.faqs || []} />;
       
       default:
-        console.warn(`Unknown block type: ${block._type}`);
         return null;
     }
   };

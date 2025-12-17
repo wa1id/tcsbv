@@ -92,9 +92,36 @@ export const homeCTABlock = defineType({
               type: 'string',
             }),
             defineField({
-              name: 'url',
-              title: 'Button URL',
+              name: 'linkType',
+              title: 'Link Type',
               type: 'string',
+              options: {
+                list: [
+                  { title: 'Internal Page', value: 'internal' },
+                  { title: 'External URL', value: 'external' },
+                  { title: 'Anchor Link', value: 'anchor' },
+                ],
+              },
+              initialValue: 'internal',
+            }),
+            defineField({
+              name: 'internalLink',
+              title: 'Internal Page',
+              type: 'reference',
+              to: [{ type: 'page' }],
+              hidden: ({ parent }) => parent?.linkType !== 'internal',
+            }),
+            defineField({
+              name: 'externalUrl',
+              title: 'External URL',
+              type: 'url',
+              hidden: ({ parent }) => parent?.linkType !== 'external',
+            }),
+            defineField({
+              name: 'anchorLink',
+              title: 'Anchor Link (e.g., #faq)',
+              type: 'string',
+              hidden: ({ parent }) => parent?.linkType !== 'anchor',
             }),
             defineField({
               name: 'style',

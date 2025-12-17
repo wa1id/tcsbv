@@ -12,5 +12,10 @@ export default defineCliConfig({
   autoUpdates: true,
   
   // Use deployment config for standalone studio
-  studioHost: 'tcsbv'
+  studioHost: 'tcsbv',
+  
+  // Deployment configuration
+  deployment: {
+    appId: 'gu20oxcrp29nynskmofenvyg',
+  },
 })

@@ -248,3 +248,74 @@ export async function getTestimonialsByService(serviceId: string) {
     return []
   }
 }
+
+export async function getServicesPageSettings() {
+  try {
+    const query = `*[_type == "servicesPageSettings"][0] {
+      enabled,
+      heroSection,
+      servicesSection {
+        ...,
+        selectedServices[]-> {
+          _id,
+          title,
+          description,
+          price,
+          features,
+          slug,
+          image
+        }
+      },
+      testimonialsSection,
+      faqSection,
+      seo
+    }`
+    const data = await client.fetch(query)
+    return data || {
+      enabled: true,
+      heroSection: {
+        title: 'Our Services',
+        subtitle: 'Professional automotive services tailored to your needs'
+      },
+      servicesSection: {
+        title: 'Our Services',
+        subtitle: 'We provide comprehensive automotive services to keep your vehicle running smoothly and efficiently.',
+        showAllServices: true
+      },
+      testimonialsSection: {
+        enabled: true,
+        title: 'What Our Customers Say',
+        subtitle: "Don't just take our word for it - hear from our satisfied customers about their experience with our services"
+      },
+      faqSection: {
+        enabled: true,
+        title: 'Frequently Asked Questions',
+        subtitle: 'Find answers to common questions about our automotive services and expertise.'
+      }
+    }
+  } catch (error) {
+    console.warn('Failed to fetch services page settings from Sanity:', error)
+    return {
+      enabled: true,
+      heroSection: {
+        title: 'Our Services',
+        subtitle: 'Professional automotive services tailored to your needs'
+      },
+      servicesSection: {
+        title: 'Our Services',
+        subtitle: 'We provide comprehensive automotive services to keep your vehicle running smoothly and efficiently.',
+        showAllServices: true
+      },
+      testimonialsSection: {
+        enabled: true,
+        title: 'What Our Customers Say',
+        subtitle: "Don't just take our word for it - hear from our satisfied customers about their experience with our services"
+      },
+      faqSection: {
+        enabled: true,
+        title: 'Frequently Asked Questions',
+        subtitle: 'Find answers to common questions about our automotive services and expertise.'
+      }
+    }
+  }
+}

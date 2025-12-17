@@ -40,6 +40,7 @@ interface SiteSettings {
 interface ServicesPageClientProps {
     services: Service[];
     siteSettings: SiteSettings;
+    pageSettings?: any;
 }
 
 // Testimonials Component
@@ -377,7 +378,7 @@ const CTASection = () => {
     );
 };
 
-const ServicesPageClient = ({ services, siteSettings }: ServicesPageClientProps) => {
+const ServicesPageClient = ({ services, siteSettings, pageSettings }: ServicesPageClientProps) => {
     const containerRef = React.useRef(null);
     const heroRef = React.useRef(null);
     const headingRef = React.useRef(null);

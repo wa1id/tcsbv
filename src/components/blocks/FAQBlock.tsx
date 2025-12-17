@@ -13,7 +13,6 @@ interface FAQBlockProps {
 }
 
 const FAQBlock = ({ data }: FAQBlockProps) => {
-  console.log('FAQBlock received data:', data);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });

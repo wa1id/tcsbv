@@ -46,7 +46,11 @@ const HomeHeroBlock = ({ data, siteSettings }: HomeHeroBlockProps) => {
     ? data.mainHeadline.split('\n').filter(Boolean)
     : ['Highly skilled certified', 'mechanics', 'guaranteed.']
 
-  const ctaLink = data?.ctaButton?.url || '/contact'
+  const ctaLink = data?.ctaButton?.linkType === 'internal' && data?.ctaButton?.internalLink?.slug?.current
+    ? `/${data.ctaButton.internalLink.slug.current}`
+    : data?.ctaButton?.linkType === 'external' && data?.ctaButton?.externalUrl
+    ? data.ctaButton.externalUrl
+    : '/contact'
   const ctaText = data?.ctaButton?.text || 'Need a car inspection?'
   const welcomeText = data?.welcomeText || 'Welcome to TCsBV'
   const contactPrompt = data?.contactInfo?.questionText || 'Got a question about our services?'

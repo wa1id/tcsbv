@@ -18,6 +18,14 @@ interface FooterProps {
       instagram?: string;
       linkedin?: string;
     };
+    footer?: {
+      aboutText?: string;
+      copyrightText?: string;
+      quickLinks?: Array<any>;
+      showNewsletter?: boolean;
+      newsletterTitle?: string;
+      newsletterDescription?: string;
+    };
   };
 }
 

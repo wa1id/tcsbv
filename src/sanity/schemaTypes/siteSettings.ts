@@ -84,52 +84,190 @@ export const siteSettings = defineType({
         }),
       ],
     }),
+    // defineField({
+    //   name: 'heroSection',
+    //   title: 'Hero Section',
+    //   type: 'object',
+    //   fields: [
+    //     defineField({
+    //       name: 'title',
+    //       title: 'Hero Title',
+    //       type: 'string',
+    //     }),
+    //     defineField({
+    //       name: 'subtitle',
+    //       title: 'Hero Subtitle',
+    //       type: 'text',
+    //       rows: 2,
+    //     }),
+    //     defineField({
+    //       name: 'description',
+    //       title: 'Hero Description',
+    //       type: 'text',
+    //       rows: 3,
+    //     }),
+    //     defineField({
+    //       name: 'backgroundImage',
+    //       title: 'Background Image',
+    //       type: 'image',
+    //       options: {
+    //         hotspot: true,
+    //       },
+    //     }),
+    //     defineField({
+    //       name: 'ctaButton',
+    //       title: 'Call to Action Button',
+    //       type: 'object',
+    //       fields: [
+    //         defineField({
+    //           name: 'text',
+    //           title: 'Button Text',
+    //           type: 'string',
+    //         }),
+    //         defineField({
+    //           name: 'url',
+    //           title: 'Button URL',
+    //           type: 'url',
+    //         }),
+    //       ],
+    //     }),
+    //   ],
+    // }),
     defineField({
-      name: 'heroSection',
-      title: 'Hero Section',
+      name: 'ctaButton',
+      title: 'Header CTA Button',
       type: 'object',
       fields: [
         defineField({
-          name: 'title',
-          title: 'Hero Title',
+          name: 'enabled',
+          title: 'Show CTA Button',
+          type: 'boolean',
+          initialValue: true,
+        }),
+        defineField({
+          name: 'text',
+          title: 'Button Text',
           type: 'string',
+          initialValue: 'Get in touch',
         }),
         defineField({
-          name: 'subtitle',
-          title: 'Hero Subtitle',
-          type: 'text',
-          rows: 2,
+          name: 'linkType',
+          title: 'Link Type',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'Internal Page', value: 'internal' },
+              { title: 'External URL', value: 'external' },
+            ],
+          },
+          initialValue: 'internal',
         }),
         defineField({
-          name: 'description',
-          title: 'Hero Description',
+          name: 'internalLink',
+          title: 'Internal Page',
+          type: 'reference',
+          to: [{ type: 'page' }],
+          hidden: ({ parent }) => parent?.linkType !== 'internal',
+        }),
+        defineField({
+          name: 'externalUrl',
+          title: 'External URL',
+          type: 'url',
+          hidden: ({ parent }) => parent?.linkType !== 'external',
+        }),
+      ],
+    }),
+    defineField({
+      name: 'footer',
+      title: 'Footer Settings',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'aboutText',
+          title: 'About Text',
           type: 'text',
           rows: 3,
+          description: 'Short description about your company in the footer',
         }),
         defineField({
-          name: 'backgroundImage',
-          title: 'Background Image',
-          type: 'image',
-          options: {
-            hotspot: true,
-          },
+          name: 'copyrightText',
+          title: 'Copyright Text',
+          type: 'string',
+          description: 'Copyright text (e.g., "© 2024 TCSBV. All rights reserved.")',
         }),
         defineField({
-          name: 'ctaButton',
-          title: 'Call to Action Button',
-          type: 'object',
-          fields: [
-            defineField({
-              name: 'text',
-              title: 'Button Text',
-              type: 'string',
-            }),
-            defineField({
-              name: 'url',
-              title: 'Button URL',
-              type: 'url',
-            }),
+          name: 'quickLinks',
+          title: 'Quick Links',
+          type: 'array',
+          of: [
+            {
+              type: 'object',
+              fields: [
+                defineField({
+                  name: 'title',
+                  title: 'Link Title',
+                  type: 'string',
+                }),
+                defineField({
+                  name: 'linkType',
+                  title: 'Link Type',
+                  type: 'string',
+                  options: {
+                    list: [
+                      { title: 'Internal Page', value: 'internal' },
+                      { title: 'External URL', value: 'external' },
+                    ],
+                  },
+                  initialValue: 'internal',
+                }),
+                defineField({
+                  name: 'internalLink',
+                  title: 'Internal Page',
+                  type: 'reference',
+                  to: [{ type: 'page' }],
+                  hidden: ({ parent }) => parent?.linkType !== 'internal',
+                }),
+                defineField({
+                  name: 'externalUrl',
+                  title: 'External URL',
+                  type: 'url',
+                  hidden: ({ parent }) => parent?.linkType !== 'external',
+                }),
+              ],
+              preview: {
+                select: {
+                  title: 'title',
+                  linkType: 'linkType',
+                },
+                prepare({ title, linkType }) {
+                  return {
+                    title,
+                    subtitle: linkType === 'internal' ? 'Internal Link' : 'External Link',
+                  }
+                },
+              },
+            },
           ],
+        }),
+        defineField({
+          name: 'showNewsletter',
+          title: 'Show Newsletter Signup',
+          type: 'boolean',
+          description: 'Show/hide newsletter signup form in footer',
+          initialValue: true,
+        }),
+        defineField({
+          name: 'newsletterTitle',
+          title: 'Newsletter Title',
+          type: 'string',
+          hidden: ({ parent }) => !parent?.showNewsletter,
+        }),
+        defineField({
+          name: 'newsletterDescription',
+          title: 'Newsletter Description',
+          type: 'text',
+          rows: 2,
+          hidden: ({ parent }) => !parent?.showNewsletter,
         }),
       ],
     }),

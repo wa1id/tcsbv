@@ -52,14 +52,7 @@ async function getPage(slug: string) {
       }
     `
     
-    console.log('Searching for page with slug:', slug)
     const result = await client.fetch(query, { slug })
-    console.log('Query result for slug', slug, ':', result)
-    
-    // Also try to fetch all pages to see what exists
-    const allPages = await client.fetch(`*[_type == "page"] { title, slug, isHomePage }`)
-    console.log('All pages in Sanity:', allPages)
-    
     return result
   } catch (error) {
     console.error('Error fetching page:', error)
@@ -73,18 +66,13 @@ export default async function DynamicPage({ params }: PageProps) {
   // Join the slug array to handle nested routes
   const slug = resolvedParams.slug?.join('/') || ''
   
-  console.log('Dynamic page slug:', slug, 'params:', resolvedParams)
-  
   const [page, siteSettings, navigation] = await Promise.all([
     getPage(slug),
     getSiteSettings(),
     getNavigation()
   ])
 
-  console.log('Found page:', page)
-
   if (!page) {
-    console.log('Page not found for slug:', slug)
     notFound()
   }
 

@@ -38,10 +38,29 @@ export const homeHeroBlock = defineType({
           initialValue: 'Need a car inspection?',
         }),
         defineField({
-          name: 'url',
-          title: 'Button URL',
+          name: 'linkType',
+          title: 'Link Type',
           type: 'string',
-          initialValue: '/contact',
+          options: {
+            list: [
+              { title: 'Internal Page', value: 'internal' },
+              { title: 'External URL', value: 'external' },
+            ],
+          },
+          initialValue: 'internal',
+        }),
+        defineField({
+          name: 'internalLink',
+          title: 'Internal Page',
+          type: 'reference',
+          to: [{ type: 'page' }],
+          hidden: ({ parent }) => parent?.linkType !== 'internal',
+        }),
+        defineField({
+          name: 'externalUrl',
+          title: 'External URL',
+          type: 'url',
+          hidden: ({ parent }) => parent?.linkType !== 'external',
         }),
       ],
     }),
