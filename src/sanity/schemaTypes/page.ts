@@ -19,7 +19,36 @@ export const page = defineType({
         source: 'title',
         maxLength: 96,
       },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.custom((slug, context) => {
+        const isHomePage = (context.document as any)?.isHomePage
+        if (isHomePage) {
+          return true // Home page doesn't need a slug
+        }
+        return slug?.current ? true : 'Slug is required for non-home pages'
+      }),
+      description: 'Leave empty for home page, or generate from title for other pages',
+    }),
+    defineField({
+      name: 'isHomePage',
+      title: 'Is Home Page',
+      type: 'boolean',
+      description: 'Mark this page as the home page (only one page should be marked as home)',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'pageType',
+      title: 'Page Type',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Standard Page', value: 'standard' },
+          { title: 'Home Page', value: 'home' },
+          { title: 'Contact Page', value: 'contact' },
+          { title: 'Services Page', value: 'services' },
+          { title: 'About Page', value: 'about' },
+        ],
+      },
+      initialValue: 'standard',
     }),
     defineField({
       name: 'seo',
@@ -66,17 +95,19 @@ export const page = defineType({
       ],
     }),
     defineField({
-      name: 'content',
-      title: 'Page Content',
+      name: 'pageBuilder',
+      title: 'Page Sections',
       type: 'array',
+      description: 'Add and arrange sections for this page',
       of: [
-        { type: 'block' },
-        {
-          type: 'image',
-          options: {
-            hotspot: true,
-          },
-        },
+        { type: 'heroBlock' },
+        { type: 'homeHeroBlock' },
+        { type: 'homeCTABlock' },
+        { type: 'servicesBlock' },
+        { type: 'textBlock' },
+        { type: 'contactBlock' },
+        { type: 'testimonialsBlock' },
+        { type: 'faqBlock' },
       ],
     }),
     defineField({
@@ -90,11 +121,13 @@ export const page = defineType({
     select: {
       title: 'title',
       slug: 'slug.current',
+      isHomePage: 'isHomePage',
+      pageType: 'pageType',
     },
-    prepare({ title, slug }) {
+    prepare({ title, slug, isHomePage, pageType }) {
       return {
-        title,
-        subtitle: slug ? `/${slug}` : 'No slug',
+        title: `${title}${isHomePage ? ' (Home)' : ''}`,
+        subtitle: `${pageType} - /${slug || 'no-slug'}`,
       }
     },
   },

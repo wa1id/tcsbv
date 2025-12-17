@@ -1,0 +1,8 @@
+export { heroBlock } from './heroBlock'
+export { homeHeroBlock } from './homeHeroBlock'
+export { homeCTABlock } from './homeCTABlock'
+export { servicesBlock } from './servicesBlock'
+export { textBlock } from './textBlock'
+export { contactBlock } from './contactBlock'
+export { testimonialsBlock } from './testimonialsBlock'
+export { faqBlock } from './faqBlock'

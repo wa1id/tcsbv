@@ -10,7 +10,7 @@ interface NavbarProps {
     logo?: any;
   };
   navigation?: {
-    pages: Array<{ title: string; slug: { current: string } }>;
+    pages: Array<{ title: string; slug: { current: string }; isHomePage?: boolean }>;
     services: Array<{ title: string; slug: { current: string } }>;
   };
 }
@@ -148,9 +148,9 @@ const DynamicNavbar = ({ siteSettings, navigation }: NavbarProps) => {
 
   // Default navigation links with fallback
   const defaultLinks = [
-    { label: "Home", href: "/" },
+    // { label: "Home", href: "/" },
     { label: "Services", href: "/services" },
-    { label: "Contact", href: "/contact" },
+    // { label: "Contact", href: "/contact" },
   ];
 
   // Get services list
@@ -159,13 +159,15 @@ const DynamicNavbar = ({ siteSettings, navigation }: NavbarProps) => {
   // Combine dynamic navigation with defaults (excluding Services if we have services dropdown)
   const links = navigation?.pages?.length 
     ? [
-        { label: "Home", href: "/" },
-        ...navigation.pages.map(page => ({
-          label: page.title,
-          href: `/${page.slug.current}`
-        })),
+        // { label: "Home", href: "/" },
+        ...navigation.pages
+          .filter(page => page.slug?.current && !page.isHomePage) // Filter out home pages and pages without slugs
+          .map(page => ({
+            label: page.title,
+            href: `/${page.slug.current}`
+          })),
         ...(services.length > 0 ? [] : [{ label: "Services", href: "/services" }]),
-        { label: "Contact", href: "/contact" },
+        // { label: "Contact", href: "/contact" },
       ]
     : defaultLinks.filter(link => link.label !== "Services" || services.length === 0);
 

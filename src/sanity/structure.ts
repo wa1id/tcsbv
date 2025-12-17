@@ -15,27 +15,58 @@ export const structure: StructureResolver = (S) =>
 
       S.divider(),
 
-      // Pages
+      // Pages with custom organization
       S.listItem()
         .title("Pages")
-        .schemaType("page")
-        .child(S.documentTypeList("page").title("Pages")),
+        .child(
+          S.list()
+            .title("Pages")
+            .items([
+              // Home Page
+              S.listItem()
+                .title("Home Page")
+                .child(
+                  S.documentList()
+                    .title("Home Page")
+                    .filter('_type == "page" && (isHomePage == true || pageType == "home")')
+                ),
+              
+              // Main Pages
+              S.listItem()
+                .title("Main Pages")
+                .child(
+                  S.documentList()
+                    .title("Main Pages")
+                    .filter('_type == "page" && pageType in ["contact", "services", "about"]')
+                ),
+              
+              // All Pages
+              S.listItem()
+                .title("All Pages")
+                .child(S.documentTypeList("page").title("All Pages")),
+            ])
+        ),
 
-      // Services
+      S.divider(),
+
+      // Content Types
       S.listItem()
         .title("Services")
         .schemaType("service")
         .child(S.documentTypeList("service").title("Services")),
 
-      // FAQs
+      S.listItem()
+        .title("Testimonials")
+        .schemaType("testimonial")
+        .child(S.documentTypeList("testimonial").title("Testimonials")),
+
       S.listItem()
         .title("FAQs")
         .schemaType("faq")
         .child(S.documentTypeList("faq").title("FAQs")),
 
-      // Testimonials
       S.listItem()
-        .title("Testimonials")
-        .schemaType("testimonial")
-        .child(S.documentTypeList("testimonial").title("Testimonials")),
+        .title("Hero Sections")
+        .schemaType("hero")
+        .child(S.documentTypeList("hero").title("Hero Sections")),
     ]);
