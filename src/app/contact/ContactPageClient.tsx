@@ -37,12 +37,37 @@ const ContactPageClient = ({ siteSettings }: ContactPageClientProps) => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
-        // Simulate form submission
-        setTimeout(() => {
+
+        try {
+            const response = await fetch('/api/ses', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    emails: [siteSettings.contactInfo?.email || 'info@tcsbv.com'],
+                    tenantName: 'TCSBV',
+                    dynamicTemplateData: {
+                        name: formData.name,
+                        email: formData.email,
+                        phoneNumber: formData.phone,
+                        message: formData.message,
+                    },
+                }),
+            });
+
+            if (response.ok) {
+                alert("Thank you for your message! We'll get back to you soon.");
+                setFormData({ name: "", email: "", phone: "", message: "" });
+            } else {
+                throw new Error('Failed to send message');
+            }
+        } catch (error) {
+            console.error('Error sending message:', error);
+            alert("Sorry, there was an error sending your message. Please try again.");
+        } finally {
             setIsSubmitting(false);
-            alert("Thank you for your message! We'll get back to you soon.");
-            setFormData({ name: "", email: "", phone: "", message: "" });
-        }, 1000);
+        }
     };
 
     const heroVariants = {
