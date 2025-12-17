@@ -160,10 +160,12 @@ const DynamicNavbar = ({ siteSettings, navigation }: NavbarProps) => {
   const links = navigation?.pages?.length 
     ? [
         { label: "Home", href: "/" },
-        ...navigation.pages.map(page => ({
-          label: page.title,
-          href: `/${page.slug.current}`
-        })),
+        ...navigation.pages
+          .filter(page => page.slug?.current && !page.isHomePage) // Filter out home pages and pages without slugs
+          .map(page => ({
+            label: page.title,
+            href: `/${page.slug.current}`
+          })),
         ...(services.length > 0 ? [] : [{ label: "Services", href: "/services" }]),
         { label: "Contact", href: "/contact" },
       ]
