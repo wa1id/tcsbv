@@ -36,21 +36,6 @@ export const page = defineType({
       initialValue: false,
     }),
     defineField({
-      name: 'pageType',
-      title: 'Page Type',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'Standard Page', value: 'standard' },
-          { title: 'Home Page', value: 'home' },
-          { title: 'Contact Page', value: 'contact' },
-          { title: 'Services Page', value: 'services' },
-          { title: 'About Page', value: 'about' },
-        ],
-      },
-      initialValue: 'standard',
-    }),
-    defineField({
       name: 'seo',
       title: 'SEO Settings',
       type: 'object',
@@ -92,12 +77,11 @@ export const page = defineType({
       title: 'title',
       slug: 'slug.current',
       isHomePage: 'isHomePage',
-      pageType: 'pageType',
     },
-    prepare({ title, slug, isHomePage, pageType }) {
+    prepare({ title, slug, isHomePage }) {
       return {
         title: `${title}${isHomePage ? ' (Home)' : ''}`,
-        subtitle: `${pageType} - /${slug || 'no-slug'}`,
+        subtitle: `/${slug || ''}`,
       }
     },
   },

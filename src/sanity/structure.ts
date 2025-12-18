@@ -15,37 +15,11 @@ export const structure: StructureResolver = (S) =>
 
       S.divider(),
 
-      // Pages with custom organization
+      // Pages
       S.listItem()
         .title("Pages")
-        .child(
-          S.list()
-            .title("Pages")
-            .items([
-              // Home Page
-              S.listItem()
-                .title("Home Page")
-                .child(
-                  S.documentList()
-                    .title("Home Page")
-                    .filter('_type == "page" && (isHomePage == true || pageType == "home")')
-                ),
-              
-              // Main Pages
-              S.listItem()
-                .title("Main Pages")
-                .child(
-                  S.documentList()
-                    .title("Main Pages")
-                    .filter('_type == "page" && pageType in ["contact", "services", "about"]')
-                ),
-              
-              // All Pages
-              S.listItem()
-                .title("All Pages")
-                .child(S.documentTypeList("page").title("All Pages")),
-            ])
-        ),
+        .schemaType("page")
+        .child(S.documentTypeList("page").title("Pages")),
 
       S.divider(),
 

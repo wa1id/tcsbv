@@ -48,8 +48,7 @@ async function getPage(slug: string) {
             order
           }
         },
-        seo,
-        pageType
+        seo
       }
     `
     
