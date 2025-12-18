@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "createdAt": "2025-12-17T18:38:14.360Z",
+  "createdAt": "2025-12-18T17:21:19.298Z",
   "workspaces": [
     {
       "name": "tcsbv-studio",
@@ -12,7 +12,7 @@
       "mediaLibrary": {
         "enabled": false
       },
-      "schema": "4bc7e370.create-schema.json",
+      "schema": "31fd10e6.create-schema.json",
       "tools": "ba47da56.create-tools.json"
     }
   ],

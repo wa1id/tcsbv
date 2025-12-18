@@ -416,187 +416,6 @@
   {
     "fields": [
       {
-        "initialValue": true,
-        "description": "Toggle to enable/disable the services page",
-        "name": "enabled",
-        "type": "boolean",
-        "title": "Enable Services Page"
-      },
-      {
-        "fields": [
-          {
-            "initialValue": "Our Services",
-            "name": "title",
-            "type": "string",
-            "title": "Hero Title"
-          },
-          {
-            "rows": 2,
-            "initialValue": "Professional automotive services tailored to your needs",
-            "name": "subtitle",
-            "type": "text",
-            "title": "Hero Subtitle"
-          },
-          {
-            "options": {
-              "hotspot": true
-            },
-            "name": "backgroundImage",
-            "type": "image"
-          }
-        ],
-        "name": "heroSection",
-        "type": "object"
-      },
-      {
-        "fields": [
-          {
-            "initialValue": "Our Services",
-            "name": "title",
-            "type": "string",
-            "title": "Section Title"
-          },
-          {
-            "rows": 3,
-            "initialValue": "We provide comprehensive automotive services to keep your vehicle running smoothly and efficiently.",
-            "name": "subtitle",
-            "type": "text",
-            "title": "Section Subtitle"
-          },
-          {
-            "initialValue": true,
-            "description": "Show all services or select specific ones",
-            "name": "showAllServices",
-            "type": "boolean"
-          },
-          {
-            "of": [
-              {
-                "to": [
-                  {
-                    "type": "service"
-                  }
-                ],
-                "type": "reference",
-                "title": "Reference to services"
-              }
-            ],
-            "hidden": "conditional",
-            "name": "selectedServices",
-            "type": "array"
-          }
-        ],
-        "name": "servicesSection",
-        "type": "object"
-      },
-      {
-        "fields": [
-          {
-            "initialValue": true,
-            "name": "enabled",
-            "type": "boolean",
-            "title": "Show Testimonials Section"
-          },
-          {
-            "initialValue": "What Our Customers Say",
-            "name": "title",
-            "type": "string",
-            "title": "Section Title"
-          },
-          {
-            "rows": 2,
-            "initialValue": "Don't just take our word for it - hear from our satisfied customers about their experience with our services",
-            "name": "subtitle",
-            "type": "text",
-            "title": "Section Subtitle"
-          }
-        ],
-        "name": "testimonialsSection",
-        "type": "object"
-      },
-      {
-        "fields": [
-          {
-            "initialValue": true,
-            "name": "enabled",
-            "type": "boolean",
-            "title": "Show FAQ Section"
-          },
-          {
-            "initialValue": "Frequently Asked Questions",
-            "name": "title",
-            "type": "string",
-            "title": "Section Title"
-          },
-          {
-            "rows": 2,
-            "initialValue": "Find answers to common questions about our automotive services and expertise.",
-            "name": "subtitle",
-            "type": "text",
-            "title": "Section Subtitle"
-          }
-        ],
-        "name": "faqSection",
-        "type": "object",
-        "title": "FAQ Section"
-      },
-      {
-        "fields": [
-          {
-            "validation": [
-              {
-                "rules": [
-                  {
-                    "flag": "max",
-                    "constraint": 60
-                  }
-                ],
-                "level": "error"
-              }
-            ],
-            "name": "metaTitle",
-            "type": "string"
-          },
-          {
-            "rows": 3,
-            "validation": [
-              {
-                "rules": [
-                  {
-                    "flag": "max",
-                    "constraint": 160
-                  }
-                ],
-                "level": "error"
-              }
-            ],
-            "name": "metaDescription",
-            "type": "text"
-          },
-          {
-            "options": {
-              "layout": "tags"
-            },
-            "of": [
-              {
-                "type": "string"
-              }
-            ],
-            "name": "keywords",
-            "type": "array"
-          }
-        ],
-        "name": "seo",
-        "type": "object",
-        "title": "SEO Settings"
-      }
-    ],
-    "name": "servicesPageSettings",
-    "type": "document"
-  },
-  {
-    "fields": [
-      {
         "validation": [
           {
             "rules": [
@@ -767,6 +586,10 @@
           {
             "type": "faqBlock",
             "title": "FAQ Section"
+          },
+          {
+            "type": "featuresBlock",
+            "title": "Features Section"
           }
         ],
         "name": "pageBuilder",
@@ -2260,5 +2083,214 @@
     "name": "faqBlock",
     "type": "object",
     "title": "FAQ Section"
+  },
+  {
+    "fields": [
+      {
+        "description": "Small text above the main title (e.g., \"WHY CHOOSE US\")",
+        "name": "eyebrow",
+        "type": "string",
+        "title": "Eyebrow Text"
+      },
+      {
+        "initialValue": "Excellence in Every Service",
+        "name": "title",
+        "type": "string",
+        "title": "Section Title"
+      },
+      {
+        "rows": 2,
+        "initialValue": "We combine expertise, innovation, and dedication to deliver automotive solutions that exceed expectations",
+        "name": "subtitle",
+        "type": "text",
+        "title": "Section Subtitle"
+      },
+      {
+        "initialValue": [
+          {
+            "title": "Expert Technicians",
+            "description": "Certified professionals with years of experience in automotive services"
+          },
+          {
+            "title": "Fast Service",
+            "description": "Quick turnaround times without compromising on quality"
+          },
+          {
+            "title": "Quality Guarantee",
+            "description": "100% satisfaction guarantee on all our services"
+          },
+          {
+            "title": "Fair Pricing",
+            "description": "Transparent pricing with no hidden costs"
+          },
+          {
+            "title": "Modern Equipment",
+            "description": "State-of-the-art tools and technology for best results"
+          },
+          {
+            "title": "Trusted Service",
+            "description": "Thousands of satisfied customers trust us with their vehicles"
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "options": {
+                  "hotspot": true
+                },
+                "name": "icon",
+                "type": "image"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "title",
+                "type": "string",
+                "title": "Feature Title"
+              },
+              {
+                "rows": 2,
+                "name": "description",
+                "type": "text",
+                "title": "Feature Description"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "features",
+        "type": "array"
+      },
+      {
+        "fields": [
+          {
+            "initialValue": true,
+            "name": "enabled",
+            "type": "boolean",
+            "title": "Show CTA Button"
+          },
+          {
+            "initialValue": "Get Started Today",
+            "name": "text",
+            "type": "string",
+            "title": "Button Text"
+          },
+          {
+            "options": {
+              "list": [
+                {
+                  "title": "Internal Page",
+                  "value": "internal"
+                },
+                {
+                  "title": "External URL",
+                  "value": "external"
+                }
+              ]
+            },
+            "initialValue": "internal",
+            "name": "linkType",
+            "type": "string"
+          },
+          {
+            "to": [
+              {
+                "type": "page"
+              }
+            ],
+            "hidden": "conditional",
+            "name": "internalLink",
+            "type": "reference",
+            "title": "Internal Page"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "uri",
+                    "constraint": {
+                      "options": {
+                        "scheme": [
+                          "/^http$/",
+                          "/^https$/"
+                        ],
+                        "allowRelative": false,
+                        "relativeOnly": false,
+                        "allowCredentials": false
+                      }
+                    }
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "hidden": "conditional",
+            "name": "externalUrl",
+            "type": "url",
+            "title": "External URL"
+          }
+        ],
+        "name": "ctaButton",
+        "type": "object",
+        "title": "Call to Action Button"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "Dark (Charcoal)",
+              "value": "dark"
+            },
+            {
+              "title": "Light (Cream)",
+              "value": "light"
+            },
+            {
+              "title": "White",
+              "value": "white"
+            }
+          ]
+        },
+        "initialValue": "dark",
+        "name": "backgroundColor",
+        "type": "string"
+      },
+      {
+        "options": {
+          "list": [
+            {
+              "title": "2 Columns (3 items each)",
+              "value": "2x3"
+            },
+            {
+              "title": "3 Columns (2 rows)",
+              "value": "3x2"
+            },
+            {
+              "title": "1 Column (6 items)",
+              "value": "1x6"
+            }
+          ]
+        },
+        "initialValue": "2x3",
+        "name": "layout",
+        "type": "string",
+        "title": "Layout Style"
+      }
+    ],
+    "name": "featuresBlock",
+    "type": "object",
+    "title": "Features Section"
   }
 ]
