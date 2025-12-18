@@ -9,13 +9,9 @@ export default defineCliConfig({
    * Enable auto-updates for studios.
    * Learn more at https://www.sanity.io/docs/cli#auto-updates
    */
-  autoUpdates: true,
+  deployment: {autoUpdates: true, appId: 'gu20oxcrp29nynskmofenvyg'},
   
   // Use deployment config for standalone studio
   studioHost: 'tcsbv',
-  
-  // Deployment configuration
-  deployment: {
-    appId: 'gu20oxcrp29nynskmofenvyg',
-  },
+
 })
