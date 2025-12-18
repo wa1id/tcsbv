@@ -146,7 +146,8 @@ function HomeHero({ data, siteSettings }: { data: HeroBlockProps['data']; siteSe
   const welcomeText = data?.welcomeText || 'Welcome to TCsBV'
   const contactPrompt = data?.contactInfo?.questionText || 'Got a question about our services?'
   const contactPhone = siteSettings?.contactInfo?.phone || '1.800.123.4567'
-  const showForm = data?.contactForm?.showForm !== false
+  const phoneLabel = data?.contactInfo?.phoneText || 'Call us'
+  const showForm = data?.contactForm?.showForm === true
   const formButtonText = data?.contactForm?.formTitle || 'Book appointment'
 
   const containerVariants = {
@@ -324,7 +325,7 @@ function HomeHero({ data, siteSettings }: { data: HeroBlockProps['data']; siteSe
                   {contactPrompt}
                 </p>
                 <p className='text-orange text-xs sm:text-sm lg:text-base font-medium'>
-                  Call us : {contactPhone}
+                  {phoneLabel}: {contactPhone}
                 </p>
               </div>
             </motion.div>
