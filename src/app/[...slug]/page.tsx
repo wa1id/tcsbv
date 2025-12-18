@@ -28,7 +28,8 @@ async function getPage(slug: string) {
             description,
             price,
             features,
-            slug
+            slug,
+            image
           },
           testimonials[]-> {
             _id,

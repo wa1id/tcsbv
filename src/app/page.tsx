@@ -32,7 +32,8 @@ async function getHomePage() {
           description,
           price,
           features,
-          slug
+          slug,
+          image
         },
         testimonials[]-> {
           _id,

@@ -21,10 +21,19 @@ interface Testimonial {
 }
 
 interface TestimonialsSectionProps {
-  testimonials: Testimonial[];
+  data: {
+    title?: string;
+    subtitle?: string;
+    testimonials?: Testimonial[];
+    layout?: 'carousel' | 'grid';
+  };
 }
 
-const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ testimonials }) => {
+const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ data }) => {
+    const testimonials = data.testimonials || [];
+    const title = data.title || 'Wat onze klanten zeggen';
+    const subtitle = data.subtitle || '';
+    
     const testimonialsRef = React.useRef(null);
     const isTestimonialsInView = useInView(testimonialsRef, { once: true, margin: "-100px" });
 
@@ -46,7 +55,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ testimonials 
         visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
     };
 
-    if (!testimonials || testimonials.length === 0) {
+    if (testimonials.length === 0) {
         return null;
     }
 
@@ -55,49 +64,38 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ testimonials 
             ref={testimonialsRef}
             className="relative w-full py-24 md:py-32 px-4 md:px-8 lg:px-12 bg-cream overflow-hidden"
         >
-            {/* Decorative Elements */}
             <div className="absolute top-0 left-0 w-full h-full">
                 <div className="absolute top-20 right-10 w-72 h-72 bg-orange/5 rounded-full blur-3xl" />
                 <div className="absolute bottom-20 left-10 w-96 h-96 bg-olive/5 rounded-full blur-3xl" />
             </div>
 
             <div className="relative z-10 max-w-[1450px] mx-auto">
-                {/* Section Header */}
                 <motion.div
                     variants={textVariants}
                     initial="hidden"
                     animate={isTestimonialsInView ? "visible" : "hidden"}
                     className="text-center mb-16 md:mb-20"
                 >
-                    <motion.div
-                        variants={textVariants}
-                        initial="hidden"
-                        animate={isTestimonialsInView ? "visible" : "hidden"}
-                        className="inline-block mb-4"
-                    >
-                        <span className="text-orange text-sm md:text-base font-semibold uppercase tracking-wider">
-                            Client Testimonials
-                        </span>
-                    </motion.div>
                     <motion.h2
                         variants={textVariants}
                         initial="hidden"
                         animate={isTestimonialsInView ? "visible" : "hidden"}
                         className="text-charcoal text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
                     >
-                        What Our Customers Say
+                        {title}
                     </motion.h2>
-                    <motion.p
-                        variants={textVariants}
-                        initial="hidden"
-                        animate={isTestimonialsInView ? "visible" : "hidden"}
-                        className="text-charcoal/70 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
-                    >
-                        Don't just take our word for it - hear from our satisfied customers about their experience with our services
-                    </motion.p>
+                    {subtitle && (
+                        <motion.p
+                            variants={textVariants}
+                            initial="hidden"
+                            animate={isTestimonialsInView ? "visible" : "hidden"}
+                            className="text-charcoal/70 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed"
+                        >
+                            {subtitle}
+                        </motion.p>
+                    )}
                 </motion.div>
 
-                {/* Testimonials Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     {testimonials.map((testimonial, index) => (
                         <motion.div
@@ -109,14 +107,12 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ testimonials 
                             className="group relative"
                         >
                             <div className="relative h-full bg-white rounded-2xl p-8 md:p-10 shadow-lg hover:shadow-xl transition-all duration-300 ease-out hover:-translate-y-2 border border-orange/10 hover:border-orange/20">
-                                {/* Quote Icon */}
                                 <div className="absolute top-6 right-6 text-orange/20 group-hover:text-orange/30 transition-colors duration-300">
                                     <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
                                         <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
                                     </svg>
                                 </div>
 
-                                {/* Rating Stars */}
                                 <div className="flex items-center mb-4">
                                     {[...Array(testimonial.rating || 5)].map((_, i) => (
                                         <svg
@@ -130,12 +126,10 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ testimonials 
                                     ))}
                                 </div>
 
-                                {/* Testimonial Text */}
                                 <p className="text-charcoal text-base md:text-lg leading-relaxed mb-6 italic">
                                     "{testimonial.content}"
                                 </p>
 
-                                {/* Customer Info */}
                                 <div className="flex items-center">
                                     <div className="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-orange/20">
                                         {testimonial.image ? (
@@ -160,23 +154,13 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ testimonials 
                                         </h4>
                                         <p className="text-charcoal/60 text-sm">
                                             {testimonial.position && testimonial.company 
-                                                ? `${testimonial.position} at ${testimonial.company}`
-                                                : testimonial.position || testimonial.company || 'Valued Customer'
+                                                ? `${testimonial.position}, ${testimonial.company}`
+                                                : testimonial.position || testimonial.company || ''
                                             }
                                         </p>
                                     </div>
                                 </div>
 
-                                {/* Service Badge (if linked to a service) */}
-                                {/* {testimonial.service && (
-                                    <div className="absolute top-6 left-6">
-                                        <span className="inline-block bg-orange/10 text-orange text-xs font-medium px-2 py-1 rounded-full">
-                                            {testimonial.service.title}
-                                        </span>
-                                    </div>
-                                )} */}
-
-                                {/* Hover Effect Line */}
                                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-orange to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-b-2xl" />
                             </div>
                         </motion.div>

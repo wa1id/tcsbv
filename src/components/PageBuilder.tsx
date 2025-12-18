@@ -35,13 +35,13 @@ const PageBuilder = ({ blocks, siteSettings }: PageBuilderProps) => {
         return <ContactFormBlock key={index} data={block} siteSettings={siteSettings} />;
       
       case 'servicesBlock':
-        return <ServicesSection key={index} services={block.services || []} />;
+        return <ServicesSection key={index} data={block} />;
       
       case 'testimonialsBlock':
-        return <TestimonialsSection key={index} testimonials={block.testimonials || []} />;
+        return <TestimonialsSection key={index} data={block} />;
       
       case 'faqBlock':
-        return <FAQSection key={index} faqs={block.faqs || []} />;
+        return <FAQSection key={index} data={block} />;
       
       case 'featuresBlock':
         return <FeaturesBlock key={index} data={block} />;
