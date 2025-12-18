@@ -14,11 +14,11 @@ interface FAQ {
     featured: boolean;
 }
 
-interface DynamicFAQProps {
+interface FAQSectionProps {
     faqs: FAQ[];
 }
 
-const DynamicFAQ = ({ faqs }: DynamicFAQProps) => {
+const FAQSection = ({ faqs }: FAQSectionProps) => {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 
     // Take only featured FAQs or first 3 if no featured ones
@@ -271,4 +271,4 @@ const DynamicFAQ = ({ faqs }: DynamicFAQProps) => {
     );
 };
 
-export default DynamicFAQ;
+export default FAQSection;

@@ -1,7 +1,7 @@
 import { client } from '@/sanity/lib/client'
 import { notFound } from 'next/navigation'
-import DynamicNavbar from "@/components/DynamicNavbar";
-import DynamicFooter from "@/components/DynamicFooter";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import PageBuilder from '@/components/PageBuilder'
 import { getSiteSettings, getNavigation } from "@/sanity/lib/fetch";
 
@@ -78,11 +78,11 @@ export default async function DynamicPage({ params }: PageProps) {
 
   return (
     <>
-      <DynamicNavbar siteSettings={siteSettings} navigation={navigation} />
+      <Navbar siteSettings={siteSettings} navigation={navigation} />
       <main className="min-h-screen">
         <PageBuilder blocks={page.pageBuilder || []} siteSettings={siteSettings} />
       </main>
-      <DynamicFooter siteSettings={siteSettings} />
+      <Footer siteSettings={siteSettings} />
     </>
   )
 }

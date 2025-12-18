@@ -29,7 +29,7 @@ interface FooterProps {
   };
 }
 
-const DynamicFooter = ({ siteSettings }: FooterProps) => {
+const Footer = ({ siteSettings }: FooterProps) => {
     const containerRef = React.useRef(null);
     const isInView = useInView(containerRef, { once: true, margin: "-50px" });
 
@@ -227,4 +227,4 @@ const DynamicFooter = ({ siteSettings }: FooterProps) => {
     );
 };
 
-export default DynamicFooter;
+export default Footer;

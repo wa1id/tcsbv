@@ -4,9 +4,9 @@ import React from "react";
 import HeroBlock from "./blocks/HeroBlock";
 import HomeCTABlock from "./blocks/HomeCTABlock";
 import FeaturesBlock from "./blocks/FeaturesBlock";
-import DynamicServices from "./home/DynamicServices";
-import DynamicTestimonials from "./home/DynamicTestimonials";
-import DynamicFAQ from "./home/DynamicFAQ";
+import ServicesSection from "./blocks/ServicesSection";
+import TestimonialsSection from "./blocks/TestimonialsSection";
+import FAQSection from "./blocks/FAQSection";
 import TextBlock from "./blocks/TextBlock";
 import ContactFormBlock from "./blocks/ContactFormBlock";
 
@@ -35,13 +35,13 @@ const PageBuilder = ({ blocks, siteSettings }: PageBuilderProps) => {
         return <ContactFormBlock key={index} data={block} siteSettings={siteSettings} />;
       
       case 'servicesBlock':
-        return <DynamicServices key={index} services={block.services || []} />;
+        return <ServicesSection key={index} services={block.services || []} />;
       
       case 'testimonialsBlock':
-        return <DynamicTestimonials key={index} testimonials={block.testimonials || []} />;
+        return <TestimonialsSection key={index} testimonials={block.testimonials || []} />;
       
       case 'faqBlock':
-        return <DynamicFAQ key={index} faqs={block.faqs || []} />;
+        return <FAQSection key={index} faqs={block.faqs || []} />;
       
       case 'featuresBlock':
         return <FeaturesBlock key={index} data={block} />;

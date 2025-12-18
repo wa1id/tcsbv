@@ -22,7 +22,7 @@ interface NavbarProps {
   };
 }
 
-const DynamicNavbar = ({ siteSettings, navigation }: NavbarProps) => {
+const Navbar = ({ siteSettings, navigation }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isScrollingUp, setIsScrollingUp] = useState(true);
@@ -382,4 +382,4 @@ const DynamicNavbar = ({ siteSettings, navigation }: NavbarProps) => {
   );
 };
 
-export default DynamicNavbar;
+export default Navbar;

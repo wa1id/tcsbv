@@ -20,11 +20,11 @@ interface Testimonial {
   };
 }
 
-interface DynamicTestimonialsProps {
+interface TestimonialsSectionProps {
   testimonials: Testimonial[];
 }
 
-const DynamicTestimonials: React.FC<DynamicTestimonialsProps> = ({ testimonials }) => {
+const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ testimonials }) => {
     const testimonialsRef = React.useRef(null);
     const isTestimonialsInView = useInView(testimonialsRef, { once: true, margin: "-100px" });
 
@@ -187,4 +187,4 @@ const DynamicTestimonials: React.FC<DynamicTestimonialsProps> = ({ testimonials 
     );
 };
 
-export default DynamicTestimonials;
+export default TestimonialsSection;

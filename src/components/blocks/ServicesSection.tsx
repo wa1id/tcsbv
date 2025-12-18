@@ -19,11 +19,11 @@ interface Service {
     featured: boolean;
 }
 
-interface DynamicServicesProps {
+interface ServicesSectionProps {
     services: Service[];
 }
 
-const DynamicServices = ({ services }: DynamicServicesProps) => {
+const ServicesSection = ({ services }: ServicesSectionProps) => {
     // Take only first 3 services for homepage display
     const displayServices = services.slice(0, 3);
 
@@ -156,4 +156,4 @@ const DynamicServices = ({ services }: DynamicServicesProps) => {
     );
 };
 
-export default DynamicServices;
+export default ServicesSection;

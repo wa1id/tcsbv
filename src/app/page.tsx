@@ -1,6 +1,6 @@
 import { client } from '@/sanity/lib/client'
-import DynamicNavbar from "@/components/DynamicNavbar";
-import DynamicFooter from "@/components/DynamicFooter";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import PageBuilder from '@/components/PageBuilder'
 import { getSiteSettings, getNavigation } from "@/sanity/lib/fetch";
 
@@ -69,7 +69,7 @@ export default async function Home() {
     // Fallback: show message to create home page in Sanity
     return (
       <>
-        <DynamicNavbar siteSettings={siteSettings} navigation={navigation} />
+        <Navbar siteSettings={siteSettings} navigation={navigation} />
         <main className="min-h-screen flex items-center justify-center bg-cream">
           <div className="text-center p-8">
             <h1 className="text-4xl font-bold text-orange mb-4">Welcome to TCSBV</h1>
@@ -84,18 +84,18 @@ export default async function Home() {
             </a>
           </div>
         </main>
-        <DynamicFooter siteSettings={siteSettings} />
+        <Footer siteSettings={siteSettings} />
       </>
     )
   }
 
   return (
     <>
-      <DynamicNavbar siteSettings={siteSettings} navigation={navigation} />
+      <Navbar siteSettings={siteSettings} navigation={navigation} />
       <main className="">
         <PageBuilder blocks={page.pageBuilder || []} siteSettings={siteSettings} />
       </main>
-      <DynamicFooter siteSettings={siteSettings} />
+      <Footer siteSettings={siteSettings} />
     </>
   );
 }
