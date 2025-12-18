@@ -22,7 +22,7 @@ export const featuresBlock = defineType({
       title: 'Section Subtitle',
       type: 'text',
       rows: 2,
-      initialValue: 'We combine expertise, innovation, and dedication to deliver automotive solutions that exceed expectations',
+      initialValue: 'Wij combineren expertise, innovatie en toewijding voor al uw verwarmings- en domotica oplossingen',
     }),
     defineField({
       name: 'features',
@@ -63,8 +63,8 @@ export const featuresBlock = defineType({
       ],
       initialValue: [
         {
-          title: 'Expert Technicians',
-          description: 'Certified professionals with years of experience in automotive services',
+          title: 'Vakkundige Technici',
+          description: 'Gecertificeerde professionals met jarenlange ervaring in verwarming en domotica',
         },
         {
           title: 'Fast Service',

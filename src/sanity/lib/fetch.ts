@@ -16,8 +16,8 @@ import {
 // Fallback data for when Sanity is empty
 export const fallbackData = {
   siteSettings: {
-    title: 'TCsBV',
-    description: 'Highly skilled certified mechanics guaranteed. We strive for excellence in everything we do.',
+    title: 'TCSBV',
+    description: 'Uw specialist in verwarming, domotica, onderhoud en renovatie. Kwaliteit en service staan bij ons centraal.',
     contactInfo: {
       phone: '1.800.123.4567',
       email: 'info@tcsbv.com',
@@ -30,9 +30,8 @@ export const fallbackData = {
       linkedin: '#'
     },
     seo: {
-      metaTitle: 'TCsBV - Professional Automotive Services',
-      metaDescription: 'Highly skilled certified mechanics guaranteed. We strive for excellence in everything we do.',
-      keywords: ['automotive', 'mechanics', 'car repair', 'professional service']
+      metaTitle: 'TCSBV - Verwarming, Domotica & Onderhoud',
+      metaDescription: 'Uw specialist in verwarming, domotica, onderhoud en renovatie. Kwaliteit en service staan bij ons centraal.',
     }
   },
   services: [
@@ -109,7 +108,7 @@ export const fallbackData = {
       name: 'Michael Chen',
       company: 'Tech Solutions Inc',
       position: 'Software Engineer',
-      content: 'I\'ve been bringing my car here for years. Their attention to detail and honest approach to repairs makes them my go-to automotive service provider.',
+      content: 'TCSBV heeft onze volledige verwarmingsinstallatie vervangen. Uitstekende service en vakmanschap.',
       rating: 5,
       featured: true,
       dateGiven: '2024-02-20'

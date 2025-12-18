@@ -146,7 +146,7 @@ export const homeCTABlock = defineType({
       ],
       initialValue: [
         {
-          text: 'Need a car inspection?',
+          text: 'Vraag een offerte aan',
           url: '/contact',
           style: 'primary',
         },

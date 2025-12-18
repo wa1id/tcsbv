@@ -107,7 +107,7 @@ export const heroBlock = defineType({
         if (style === 'home' && !value) return 'Main headline is required'
         return true
       }),
-      initialValue: 'Highly skilled certified mechanics guaranteed.',
+      initialValue: 'Uw specialist in verwarming & domotica',
     }),
     defineField({
       name: 'ctaButton',
@@ -119,7 +119,7 @@ export const heroBlock = defineType({
           name: 'text',
           title: 'Button Text',
           type: 'string',
-          initialValue: 'Need a car inspection?',
+          initialValue: 'Vraag een offerte aan',
         }),
         defineField({
           name: 'linkType',

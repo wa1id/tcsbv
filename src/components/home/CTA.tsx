@@ -116,7 +116,7 @@ const CTA = () => {
                 <div className="absolute inset-0">
                     <Image
                         src="/hero-new-1.jpg"
-                        alt="Automotive Service"
+                        alt="TCSBV Diensten"
                         fill
                         className="object-cover"
                         priority
@@ -147,7 +147,7 @@ const CTA = () => {
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
                             <Link href={"/contact"}>
                             <button className="bg-cream hover:bg-cream/90 text-charcoal px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg transition-colors duration-300 shadow-lg hover:shadow-xl w-full sm:w-auto">
-                                Need a car inspection?
+                                Vraag een offerte aan
                             </button>
                             </Link>
                             <a

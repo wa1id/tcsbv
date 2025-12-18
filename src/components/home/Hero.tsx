@@ -133,9 +133,8 @@ const Hero = () => {
               className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0e1306]/80 mb-6 lg:mb-8 leading-tight'
               variants={itemVariants}
             >
-              Highly skilled certified <br />
-              mechanics<br />
-              guaranteed.
+              Uw specialist in <br />
+              verwarming & domotica
             </motion.h1>
 
             {/* Button */}
@@ -145,7 +144,7 @@ const Hero = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               >
-                <a href="/contact">Need a car inspection?</a>
+                <a href="/contact">Vraag een offerte aan</a>
               
             </motion.button>
 

@@ -91,7 +91,7 @@ const ContactFormBlock = ({ data, siteSettings }: ContactFormBlockProps) => {
                   Get in touch
                 </h3>
                 <p className="text-lg text-charcoal/80 leading-relaxed mb-6">
-                  {siteSettings?.description || "We're here to help with all your automotive needs."}
+                  {siteSettings?.description || "Wij helpen u graag met al uw vragen over verwarming, domotica en onderhoud."}
                 </p>
               </div>
 

@@ -139,7 +139,7 @@ const DynamicFAQ = ({ faqs }: DynamicFAQProps) => {
                         >
                             <Image
                                 src="/hero-new-1.jpg"
-                                alt="Professional Mechanic"
+                                alt="Professionele Technicus"
                                 fill
                                 className="object-cover"
                                 priority
@@ -165,7 +165,7 @@ const DynamicFAQ = ({ faqs }: DynamicFAQProps) => {
                                     .
                                 </h2>
                                 <p className="text-lg md:text-xl text-charcoal/70 max-w-2xl">
-                                    Find answers to common questions about our automotive services and expertise.
+                                    Antwoorden op veelgestelde vragen over onze diensten en expertise.
                                 </p>
                             </motion.div>
 

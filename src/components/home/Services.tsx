@@ -79,7 +79,7 @@ const Services = () => {
                         initial="hidden"
                         animate={isTextInView ? "visible" : "hidden"}
                     >
-                        We provide comprehensive automotive services to keep your vehicle running smoothly and efficiently.
+                        Wij bieden complete oplossingen voor verwarming, domotica, onderhoud en renovatie.
                     </motion.p>
                 </div>
 

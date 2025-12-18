@@ -136,7 +136,7 @@ const FAQ = () => {
                         >
                             <Image
                                 src="/hero-new-1.jpg"
-                                alt="Professional Mechanic"
+                                alt="Professionele Technicus"
                                 fill
                                 className="object-cover"
                                 priority

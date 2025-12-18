@@ -119,7 +119,7 @@ const DynamicFooter = ({ siteSettings }: FooterProps) => {
                           {siteSettings.title || "TCsBV"}
                         </h3>
                         <p className="text-cream/70 text-sm md:text-base leading-relaxed mb-4">
-                            {siteSettings.description || "Highly skilled certified mechanics guaranteed. We strive for excellence in everything we do."}
+                            {siteSettings.description || "Uw specialist in verwarming, domotica, onderhoud en renovatie. Kwaliteit en service staan bij ons centraal."}
                         </p>
                     </motion.div>
 

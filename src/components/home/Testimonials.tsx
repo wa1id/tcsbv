@@ -23,7 +23,7 @@ const Testimonials = () => {
             role: "Software Engineer",
             image: "/men.jpg",
             rating: 5,
-            text: "I've been bringing my car here for years. Their attention to detail and honest approach to repairs makes them my go-to automotive service provider."
+            text: "TCSBV heeft onze volledige verwarmingsinstallatie vervangen. Uitstekende service en vakmanschap. Ze zijn nu ons vaste aanspreekpunt voor al ons onderhoud."
         },
         {
             id: 3,

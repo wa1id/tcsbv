@@ -139,10 +139,10 @@ function HomeHero({ data, siteSettings }: { data: HeroBlockProps['data']; siteSe
 
   const headlineLines = data?.mainHeadline
     ? data.mainHeadline.split('\n').filter(Boolean)
-    : ['Highly skilled certified', 'mechanics', 'guaranteed.']
+    : ['Uw specialist in', 'verwarming & domotica']
 
   const ctaLink = data?.ctaButton?.url || '/contact'
-  const ctaText = data?.ctaButton?.text || 'Need a car inspection?'
+  const ctaText = data?.ctaButton?.text || 'Vraag een offerte aan'
   const welcomeText = data?.welcomeText || 'Welcome to TCsBV'
   const contactPrompt = data?.contactInfo?.questionText || 'Got a question about our services?'
   const contactPhone = siteSettings?.contactInfo?.phone || '1.800.123.4567'
