@@ -86,12 +86,6 @@ export const page = defineType({
         { type: 'featuresBlock' },
       ],
     }),
-    defineField({
-      name: 'publishedAt',
-      title: 'Published At',
-      type: 'datetime',
-      initialValue: () => new Date().toISOString(),
-    }),
   ],
   preview: {
     select: {

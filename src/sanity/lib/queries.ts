@@ -75,8 +75,7 @@ export const pagesQuery = groq`
     _id,
     title,
     slug,
-    seo,
-    publishedAt
+    seo
   }
 `
 
@@ -87,8 +86,7 @@ export const pageQuery = groq`
     title,
     slug,
     content,
-    seo,
-    publishedAt
+    seo
   }
 `
 
