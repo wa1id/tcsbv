@@ -2,7 +2,6 @@
 
 import React from "react";
 import HeroBlock from "./blocks/HeroBlock";
-import HomeHeroBlock from "./blocks/HomeHeroBlock";
 import HomeCTABlock from "./blocks/HomeCTABlock";
 import FeaturesBlock from "./blocks/FeaturesBlock";
 import DynamicServices from "./home/DynamicServices";
@@ -24,10 +23,7 @@ const PageBuilder = ({ blocks, siteSettings }: PageBuilderProps) => {
 
     switch (block._type) {
       case 'heroBlock':
-        return <HeroBlock key={index} data={block} />;
-      
-      case 'homeHeroBlock':
-        return <HomeHeroBlock key={index} data={block} siteSettings={siteSettings} />;
+        return <HeroBlock key={index} data={block} siteSettings={siteSettings} />;
       
       case 'homeCTABlock':
         return <HomeCTABlock key={index} data={block} />;

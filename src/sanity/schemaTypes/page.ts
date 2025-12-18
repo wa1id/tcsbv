@@ -77,7 +77,6 @@ export const page = defineType({
       description: 'Add and arrange sections for this page',
       of: [
         { type: 'heroBlock' },
-        { type: 'homeHeroBlock' },
         { type: 'homeCTABlock' },
         { type: 'servicesBlock' },
         { type: 'textBlock' },

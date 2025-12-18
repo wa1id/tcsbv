@@ -7,7 +7,6 @@ import { testimonial } from "./testimonial";
 import { hero } from "./hero";
 import { 
   heroBlock,
-  homeHeroBlock,
   homeCTABlock, 
   servicesBlock, 
   textBlock, 
@@ -27,7 +26,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     hero,
     // Page Builder Blocks
     heroBlock,
-    homeHeroBlock,
     homeCTABlock,
     servicesBlock,
     textBlock,

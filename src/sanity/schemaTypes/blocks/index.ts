@@ -1,5 +1,4 @@
 export { heroBlock } from './heroBlock'
-export { homeHeroBlock } from './homeHeroBlock'
 export { homeCTABlock } from './homeCTABlock'
 export { servicesBlock } from './servicesBlock'
 export { textBlock } from './textBlock'
