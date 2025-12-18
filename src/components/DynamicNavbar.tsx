@@ -8,6 +8,13 @@ interface NavbarProps {
   siteSettings: {
     title: string;
     logo?: any;
+    ctaButton?: {
+      enabled?: boolean;
+      text?: string;
+      linkType?: string;
+      internalLink?: any;
+      externalUrl?: string;
+    };
   };
   navigation?: {
     pages: Array<{ title: string; slug: { current: string }; isHomePage?: boolean }>;
@@ -146,32 +153,30 @@ const DynamicNavbar = ({ siteSettings, navigation }: NavbarProps) => {
     };
   }, [isServicesOpen]);
 
-  // Default navigation links with fallback
-  const defaultLinks = [
-    // { label: "Home", href: "/" },
-    { label: "Services", href: "/services" },
-    // { label: "Contact", href: "/contact" },
-  ];
-
   // Get services list
   const services = navigation?.services || [];
 
-  // Combine dynamic navigation with defaults (excluding Services if we have services dropdown)
-  const links = navigation?.pages?.length 
-    ? [
-        // { label: "Home", href: "/" },
-        ...navigation.pages
-          .filter(page => page.slug?.current && !page.isHomePage) // Filter out home pages and pages without slugs
-          .map(page => ({
-            label: page.title,
-            href: `/${page.slug.current}`
-          })),
-        ...(services.length > 0 ? [] : [{ label: "Services", href: "/services" }]),
-        // { label: "Contact", href: "/contact" },
-      ]
-    : defaultLinks.filter(link => link.label !== "Services" || services.length === 0);
+  // Only show pages from Sanity - no default fallbacks
+  const links = navigation?.pages
+    ? navigation.pages
+        .filter(page => page.slug?.current && !page.isHomePage) // Filter out home pages and pages without slugs
+        .map(page => ({
+          label: page.title,
+          href: `/${page.slug.current}`
+        }))
+    : [];
 
-  const cta = { label: "Get in touch", href: "/contact" };
+  // CTA button from Sanity settings or default
+  const cta = siteSettings.ctaButton?.enabled !== false
+    ? {
+        label: siteSettings.ctaButton?.text || "Get in touch",
+        href: siteSettings.ctaButton?.linkType === 'internal' && siteSettings.ctaButton?.internalLink?.slug?.current
+          ? `/${siteSettings.ctaButton.internalLink.slug.current}`
+          : siteSettings.ctaButton?.linkType === 'external' && siteSettings.ctaButton?.externalUrl
+          ? siteSettings.ctaButton.externalUrl
+          : "/contact"
+      }
+    : { label: "Get in touch", href: "/contact" };
 
   return (
     <>
@@ -250,7 +255,7 @@ const DynamicNavbar = ({ siteSettings, navigation }: NavbarProps) => {
                     >
                       All Services
                     </Link>
-                    {services.map((service, index) => (
+                    {services.map((service) => (
                       <Link
                         key={service.slug.current}
                         href={`/services/${service.slug.current}`}

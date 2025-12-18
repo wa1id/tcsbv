@@ -35,7 +35,7 @@ const DynamicFooter = ({ siteSettings }: FooterProps) => {
 
     const footerLinks = [
         { label: "Home", href: "/" },
-        { label: "Services", href: "/services" },
+        // { label: "Services", href: "/services" },
         { label: "Contact", href: "/contact" },
         { label: "FAQ", href: "#faq" },
     ];

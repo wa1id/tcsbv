@@ -13,14 +13,6 @@ export const structure: StructureResolver = (S) =>
           S.document().schemaType("siteSettings").documentId("siteSettings")
         ),
 
-      // Services Page Settings (Singleton)
-      S.listItem()
-        .title("Services Page Settings")
-        .id("servicesPageSettings")
-        .child(
-          S.document().schemaType("servicesPageSettings").documentId("servicesPageSettings")
-        ),
-
       S.divider(),
 
       // Pages with custom organization

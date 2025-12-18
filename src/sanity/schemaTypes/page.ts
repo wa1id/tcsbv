@@ -108,6 +108,7 @@ export const page = defineType({
         { type: 'contactBlock' },
         { type: 'testimonialsBlock' },
         { type: 'faqBlock' },
+        { type: 'featuresBlock' },
       ],
     }),
     defineField({

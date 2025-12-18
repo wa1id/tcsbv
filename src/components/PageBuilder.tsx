@@ -4,6 +4,7 @@ import React from "react";
 import HeroBlock from "./blocks/HeroBlock";
 import HomeHeroBlock from "./blocks/HomeHeroBlock";
 import HomeCTABlock from "./blocks/HomeCTABlock";
+import FeaturesBlock from "./blocks/FeaturesBlock";
 import DynamicServices from "./home/DynamicServices";
 import DynamicTestimonials from "./home/DynamicTestimonials";
 import DynamicFAQ from "./home/DynamicFAQ";
@@ -45,6 +46,9 @@ const PageBuilder = ({ blocks, siteSettings }: PageBuilderProps) => {
       
       case 'faqBlock':
         return <DynamicFAQ key={index} faqs={block.faqs || []} />;
+      
+      case 'featuresBlock':
+        return <FeaturesBlock key={index} data={block} />;
       
       default:
         return null;
