@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react'
+import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
@@ -25,10 +25,6 @@ interface HeroBlockProps {
     ctaButton?: {
       text: string;
       url: string;
-    };
-    contactForm?: {
-      showForm: boolean;
-      formTitle: string;
     };
     contactInfo?: {
       questionText: string;
@@ -131,8 +127,6 @@ function DefaultHero({ data }: { data: HeroBlockProps['data'] }) {
 }
 
 function HomeHero({ data, siteSettings }: { data: HeroBlockProps['data']; siteSettings?: any }) {
-  const [formData, setFormData] = useState({ name: "", email: "" })
-
   const backgroundImage = data?.backgroundImage
     ? urlFor(data.backgroundImage).width(1400).height(1200).url()
     : '/hero-new.jpg'
@@ -147,8 +141,6 @@ function HomeHero({ data, siteSettings }: { data: HeroBlockProps['data']; siteSe
   const contactPrompt = data?.contactInfo?.questionText || 'Got a question about our services?'
   const contactPhone = siteSettings?.contactInfo?.phone || '1.800.123.4567'
   const phoneLabel = data?.contactInfo?.phoneText || 'Call us'
-  const showForm = data?.contactForm?.showForm === true
-  const formButtonText = data?.contactForm?.formTitle || 'Book appointment'
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -176,24 +168,6 @@ function HomeHero({ data, siteSettings }: { data: HeroBlockProps['data']; siteSe
     }
   }
 
-  const formVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] as const }
-    }
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log('Form submitted:', formData)
-  }
-
   return (
     <div>
       <motion.div 
@@ -218,37 +192,6 @@ function HomeHero({ data, siteSettings }: { data: HeroBlockProps['data']; siteSe
               className='object-cover'
               priority
             />
-            {showForm && (
-              <motion.div 
-                className='absolute bottom-4 left-4 right-4 lg:bottom-6 lg:left-6 lg:right-6 bg-white rounded-lg shadow-xl p-4 lg:p-6'
-                variants={formVariants}
-              >
-                <form onSubmit={handleSubmit} className='flex flex-col sm:flex-row gap-3 lg:gap-4 items-stretch sm:items-center'>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Name ... *"
-                    className='flex-1 min-w-0 px-3 lg:px-4 py-2.5 lg:py-3 rounded-lg bg-gray-100 text-charcoal placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange focus:bg-white transition-all text-sm lg:text-base'
-                  />
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Email ... *"
-                    className='flex-1 min-w-0 px-3 lg:px-4 py-2.5 lg:py-3 rounded-lg bg-gray-100 text-charcoal placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange focus:bg-white transition-all text-sm lg:text-base'
-                  />
-                  <button 
-                    type="submit"
-                    className='bg-orange hover:bg-[#da640e]/90 text-white px-4 lg:px-6 py-2.5 lg:py-3 rounded-lg font-semibold transition-colors whitespace-nowrap flex-shrink-0 text-sm lg:text-base'
-                  >
-                    {formButtonText}
-                  </button>
-                </form>
-              </motion.div>
-            )}
           </motion.div>
 
           <motion.div 

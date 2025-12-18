@@ -149,26 +149,6 @@ export const heroBlock = defineType({
       ],
     }),
     defineField({
-      name: 'contactForm',
-      title: 'Contact Form Settings',
-      type: 'object',
-      hidden: ({ parent }) => parent?.style !== 'home',
-      fields: [
-        defineField({
-          name: 'showForm',
-          title: 'Show Contact Form',
-          type: 'boolean',
-          initialValue: true,
-        }),
-        defineField({
-          name: 'formTitle',
-          title: 'Form Button Text',
-          type: 'string',
-          initialValue: 'Book appointment',
-        }),
-      ],
-    }),
-    defineField({
       name: 'contactInfo',
       title: 'Contact Information',
       type: 'object',
