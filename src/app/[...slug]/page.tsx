@@ -89,7 +89,7 @@ export default async function DynamicPage({ params }: PageProps) {
 
 export async function generateStaticParams() {
   const query = `
-    *[_type == "page" && defined(slug.current) && isHomePage != true] {
+    *[_type == "page" && defined(slug.current) && slug.current != "home"] {
       slug
     }
   `

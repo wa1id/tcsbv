@@ -19,21 +19,8 @@ export const page = defineType({
         source: 'title',
         maxLength: 96,
       },
-      validation: (Rule) => Rule.custom((slug, context) => {
-        const isHomePage = (context.document as any)?.isHomePage
-        if (isHomePage) {
-          return true // Home page doesn't need a slug
-        }
-        return slug?.current ? true : 'Slug is required for non-home pages'
-      }),
-      description: 'Leave empty for home page, or generate from title for other pages',
-    }),
-    defineField({
-      name: 'isHomePage',
-      title: 'Is Home Page',
-      type: 'boolean',
-      description: 'Mark this page as the home page (only one page should be marked as home)',
-      initialValue: false,
+      validation: (Rule) => Rule.required(),
+      description: 'Use "home" for the home page',
     }),
     defineField({
       name: 'seo',
@@ -76,11 +63,11 @@ export const page = defineType({
     select: {
       title: 'title',
       slug: 'slug.current',
-      isHomePage: 'isHomePage',
     },
-    prepare({ title, slug, isHomePage }) {
+    prepare({ title, slug }) {
+      const isHome = slug === 'home'
       return {
-        title: `${title}${isHomePage ? ' (Home)' : ''}`,
+        title: `${title}${isHome ? ' (Home)' : ''}`,
         subtitle: `/${slug || ''}`,
       }
     },

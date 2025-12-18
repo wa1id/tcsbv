@@ -6,7 +6,7 @@ import { getSiteSettings, getNavigation } from "@/sanity/lib/fetch";
 
 async function getHomePage() {
   const query = `
-    *[_type == "page" && isHomePage == true][0] {
+    *[_type == "page" && slug.current == "home"][0] {
       _id,
       title,
       slug,

@@ -146,8 +146,7 @@ export const navigationQuery = groq`
   {
     "pages": *[_type == "page" && !seo.noIndex] | order(title asc) {
       title,
-      slug,
-      isHomePage
+      slug
     },
     "services": []
   }

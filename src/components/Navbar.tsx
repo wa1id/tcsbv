@@ -17,7 +17,7 @@ interface NavbarProps {
     };
   };
   navigation?: {
-    pages: Array<{ title: string; slug: { current: string }; isHomePage?: boolean }>;
+    pages: Array<{ title: string; slug: { current: string } }>;
     services: Array<{ title: string; slug: { current: string } }>;
   };
 }
@@ -159,7 +159,7 @@ const Navbar = ({ siteSettings, navigation }: NavbarProps) => {
   // Only show pages from Sanity - no default fallbacks
   const links = navigation?.pages
     ? navigation.pages
-        .filter(page => page.slug?.current && !page.isHomePage) // Filter out home pages and pages without slugs
+        .filter(page => page.slug?.current && page.slug.current !== 'home')
         .map(page => ({
           label: page.title,
           href: `/${page.slug.current}`
