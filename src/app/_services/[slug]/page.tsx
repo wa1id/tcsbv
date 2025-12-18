@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getSiteSettings, getService, getServices, getNavigation, getTestimonialsByService } from '@/sanity/lib/fetch';
-import { generateSEO, generateStructuredData } from '@/lib/seo';
+import { generateSEO } from '@/lib/seo';
 import DynamicNavbar from '@/components/DynamicNavbar';
 import ServiceDetailsClient from './ServiceDetailsClient';
 
@@ -24,17 +24,13 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
   ]);
 
   if (!service) {
-    return generateSEO({}, siteSettings, `/services/${slug}`);
+    return generateSEO(undefined, undefined, siteSettings);
   }
 
   return generateSEO(
-    {
-      metaTitle: service.seo?.metaTitle || `${service.title} - ${siteSettings.title}`,
-      metaDescription: service.seo?.metaDescription || service.description,
-      keywords: service.seo?.keywords || [service.title, 'automotive service'],
-    },
-    siteSettings,
-    `/services/${slug}`
+    service.seo?.metaTitle || `${service.title} - ${siteSettings.title}`,
+    service.seo?.metaDescription || service.description,
+    siteSettings
   );
 }
 
@@ -50,19 +46,10 @@ export default async function ServicePage({ params }: ServicePageProps) {
     notFound();
   }
 
-  // Get testimonials for this service
   const testimonials = await getTestimonialsByService(service._id);
-
-  const serviceSchema = generateStructuredData('Service', service, siteSettings);
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(serviceSchema),
-        }}
-      />
       <DynamicNavbar siteSettings={siteSettings} navigation={navigation} />
       <ServiceDetailsClient 
         service={service} 

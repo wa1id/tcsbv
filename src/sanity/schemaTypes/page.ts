@@ -68,30 +68,6 @@ export const page = defineType({
           rows: 3,
           validation: (Rule) => Rule.max(160),
         }),
-        defineField({
-          name: 'ogImage',
-          title: 'Open Graph Image',
-          type: 'image',
-          options: {
-            hotspot: true,
-          },
-        }),
-        defineField({
-          name: 'keywords',
-          title: 'Keywords',
-          type: 'array',
-          of: [{ type: 'string' }],
-          options: {
-            layout: 'tags',
-          },
-        }),
-        defineField({
-          name: 'noIndex',
-          title: 'No Index',
-          type: 'boolean',
-          description: 'Prevent search engines from indexing this page',
-          initialValue: false,
-        }),
       ],
     }),
     defineField({

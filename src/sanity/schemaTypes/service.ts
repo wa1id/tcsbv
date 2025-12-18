@@ -88,15 +88,6 @@ export const service = defineType({
           rows: 3,
           validation: (Rule) => Rule.max(160),
         }),
-        defineField({
-          name: 'keywords',
-          title: 'Keywords',
-          type: 'array',
-          of: [{ type: 'string' }],
-          options: {
-            layout: 'tags',
-          },
-        }),
       ],
     }),
     defineField({

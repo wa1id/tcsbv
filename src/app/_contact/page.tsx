@@ -27,19 +27,10 @@ export async function generateMetadata(): Promise<Metadata> {
     getSiteSettings()
   ]);
   
-  if (page?.seo) {
-    return generateSEO(page.seo, siteSettings, "/contact");
-  }
-  
   return generateSEO(
-    {
-      metaTitle: `Contact Us - ${siteSettings.title}`,
-      metaDescription:
-        "Get in touch with our automotive experts for professional car repair and maintenance services.",
-      keywords: ["contact", "automotive service", "car repair", "get quote"],
-    },
-    siteSettings,
-    "/contact"
+    page?.seo?.metaTitle || `Contact Us - ${siteSettings.title}`,
+    page?.seo?.metaDescription || "Get in touch with our automotive experts for professional car repair and maintenance services.",
+    siteSettings
   );
 }
 
@@ -50,7 +41,6 @@ export default async function ContactPage() {
     getNavigation(),
   ]);
 
-  // If no contact page exists in Sanity, use the old component as fallback
   if (!page) {
     return (
       <>
