@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageBuilder from '@/components/PageBuilder'
-import { getSiteSettings, getNavigation } from "@/sanity/lib/fetch";
+import { getSiteSettings, getHeaderSettings, getFooterSettings } from "@/sanity/lib/fetch";
 
 interface PageProps {
   params: Promise<{
@@ -66,10 +66,11 @@ export default async function DynamicPage({ params }: PageProps) {
   // Join the slug array to handle nested routes
   const slug = resolvedParams.slug?.join('/') || ''
   
-  const [page, siteSettings, navigation] = await Promise.all([
+  const [page, siteSettings, headerSettings, footerSettings] = await Promise.all([
     getPage(slug),
     getSiteSettings(),
-    getNavigation()
+    getHeaderSettings(),
+    getFooterSettings()
   ])
 
   if (!page) {
@@ -78,11 +79,11 @@ export default async function DynamicPage({ params }: PageProps) {
 
   return (
     <>
-      <Navbar siteSettings={siteSettings} navigation={navigation} />
+      <Navbar siteSettings={siteSettings} headerSettings={headerSettings} />
       <main className="min-h-screen">
         <PageBuilder blocks={page.pageBuilder || []} siteSettings={siteSettings} />
       </main>
-      <Footer siteSettings={siteSettings} />
+      <Footer siteSettings={siteSettings} footerSettings={footerSettings} />
     </>
   )
 }

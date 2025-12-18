@@ -2,6 +2,24 @@
 
 import { motion, useInView } from "framer-motion";
 import React from "react";
+import Link from "next/link";
+
+interface LinkItem {
+  title: string;
+  linkType: 'internal' | 'external';
+  internalLink?: { slug: { current: string } };
+  externalUrl?: string;
+}
+
+interface FooterSettings {
+  aboutText?: string;
+  quickLinks?: LinkItem[];
+  legalLinks?: LinkItem[];
+  copyrightText?: string;
+  showNewsletter?: boolean;
+  newsletterTitle?: string;
+  newsletterDescription?: string;
+}
 
 interface FooterProps {
   siteSettings: {
@@ -18,27 +36,27 @@ interface FooterProps {
       instagram?: string;
       linkedin?: string;
     };
-    footer?: {
-      aboutText?: string;
-      copyrightText?: string;
-      quickLinks?: Array<any>;
-      showNewsletter?: boolean;
-      newsletterTitle?: string;
-      newsletterDescription?: string;
-    };
   };
+  footerSettings?: FooterSettings;
 }
 
-const Footer = ({ siteSettings }: FooterProps) => {
+const Footer = ({ siteSettings, footerSettings }: FooterProps) => {
     const containerRef = React.useRef(null);
     const isInView = useInView(containerRef, { once: true, margin: "-50px" });
 
-    const footerLinks = [
-        { label: "Home", href: "/" },
-        // { label: "Services", href: "/services" },
-        { label: "Contact", href: "/contact" },
-        { label: "FAQ", href: "#faq" },
-    ];
+    const getHref = (item: LinkItem) => {
+        if (item.linkType === 'internal' && item.internalLink?.slug?.current) {
+            const slug = item.internalLink.slug.current;
+            return slug === 'home' ? '/' : `/${slug}`;
+        }
+        if (item.linkType === 'external' && item.externalUrl) {
+            return item.externalUrl;
+        }
+        return '#';
+    };
+
+    const quickLinks = footerSettings?.quickLinks || [];
+    const legalLinks = footerSettings?.legalLinks || [];
 
     const contactInfo = [
         { 
@@ -83,7 +101,6 @@ const Footer = ({ siteSettings }: FooterProps) => {
         },
     ];
 
-    // Filter out social links with empty or "#" hrefs
     const validSocialLinks = socialLinks.filter(social => social.href && social.href !== "#");
 
     const itemVariants = {
@@ -105,9 +122,7 @@ const Footer = ({ siteSettings }: FooterProps) => {
             className="w-full bg-charcoal text-cream py-12 md:py-16 lg:py-20 px-4 md:px-8 lg:px-12"
         >
             <div className="max-w-[1450px] mx-auto">
-                {/* Main Footer Content */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-8 md:mb-12">
-                    {/* Company Info */}
                     <motion.div
                         custom={0}
                         variants={itemVariants}
@@ -119,33 +134,33 @@ const Footer = ({ siteSettings }: FooterProps) => {
                           {siteSettings.title || "TCsBV"}
                         </h3>
                         <p className="text-cream/70 text-sm md:text-base leading-relaxed mb-4">
-                            {siteSettings.description || "Uw specialist in verwarming, domotica, onderhoud en renovatie. Kwaliteit en service staan bij ons centraal."}
+                            {footerSettings?.aboutText || siteSettings.description || "Uw specialist in verwarming, domotica, onderhoud en renovatie. Kwaliteit en service staan bij ons centraal."}
                         </p>
                     </motion.div>
 
-                    {/* Quick Links */}
-                    <motion.div
-                        custom={1}
-                        variants={itemVariants}
-                        initial="hidden"
-                        animate={isInView ? "visible" : "hidden"}
-                    >
-                        <h4 className="text-lg font-semibold text-orange mb-4">Quick Links</h4>
-                        <ul className="space-y-3">
-                            {footerLinks.map((link, index) => (
-                                <li key={link.label}>
-                                    <a
-                                        href={link.href}
-                                        className="text-cream/70 hover:text-orange transition-colors duration-300 text-sm md:text-base"
-                                    >
-                                        {link.label}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    </motion.div>
+                    {quickLinks.length > 0 && (
+                        <motion.div
+                            custom={1}
+                            variants={itemVariants}
+                            initial="hidden"
+                            animate={isInView ? "visible" : "hidden"}
+                        >
+                            <h4 className="text-lg font-semibold text-orange mb-4">Quick Links</h4>
+                            <ul className="space-y-3">
+                                {quickLinks.map((link) => (
+                                    <li key={link.title}>
+                                        <Link
+                                            href={getHref(link)}
+                                            className="text-cream/70 hover:text-orange transition-colors duration-300 text-sm md:text-base"
+                                        >
+                                            {link.title}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </motion.div>
+                    )}
 
-                    {/* Contact Info */}
                     <motion.div
                         custom={2}
                         variants={itemVariants}
@@ -154,7 +169,7 @@ const Footer = ({ siteSettings }: FooterProps) => {
                     >
                         <h4 className="text-lg font-semibold text-orange mb-4">Contact</h4>
                         <ul className="space-y-3">
-                            {contactInfo.map((info, index) => (
+                            {contactInfo.map((info) => (
                                 <li key={info.label}>
                                     <a
                                         href={info.href}
@@ -176,7 +191,6 @@ const Footer = ({ siteSettings }: FooterProps) => {
                         </ul>
                     </motion.div>
 
-                    {/* Social Media */}
                     {validSocialLinks.length > 0 && (
                         <motion.div
                             custom={3}
@@ -186,7 +200,7 @@ const Footer = ({ siteSettings }: FooterProps) => {
                         >
                             <h4 className="text-lg font-semibold text-orange mb-4">Follow Us</h4>
                             <div className="flex gap-4">
-                                {validSocialLinks.map((social, index) => (
+                                {validSocialLinks.map((social) => (
                                     <a
                                         key={social.name}
                                         href={social.href}
@@ -201,7 +215,6 @@ const Footer = ({ siteSettings }: FooterProps) => {
                     )}
                 </div>
 
-                {/* Bottom Bar */}
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={isInView ? { opacity: 1 } : { opacity: 0 }}
@@ -210,16 +223,21 @@ const Footer = ({ siteSettings }: FooterProps) => {
                 >
                     <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                         <p className="text-cream/60 text-sm text-center md:text-left">
-                            © {new Date().getFullYear()} {siteSettings.title || "TCsBV"}. All rights reserved.
+                            {footerSettings?.copyrightText || `© ${new Date().getFullYear()} ${siteSettings.title || "TCsBV"}. All rights reserved.`}
                         </p>
-                        <div className="flex gap-6 text-sm text-cream/60">
-                            <a href="#" className="hover:text-orange transition-colors duration-300">
-                                Privacy Policy
-                            </a>
-                            <a href="#" className="hover:text-orange transition-colors duration-300">
-                                Terms of Service
-                            </a>
-                        </div>
+                        {legalLinks.length > 0 && (
+                            <div className="flex gap-6 text-sm text-cream/60">
+                                {legalLinks.map((link) => (
+                                    <Link
+                                        key={link.title}
+                                        href={getHref(link)}
+                                        className="hover:text-orange transition-colors duration-300"
+                                    >
+                                        {link.title}
+                                    </Link>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </motion.div>
             </div>

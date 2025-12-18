@@ -1,13 +1,14 @@
 import { client } from './client'
 import { 
   siteSettingsQuery, 
+  headerSettingsQuery,
+  footerSettingsQuery,
   servicesQuery, 
   serviceQuery, 
   faqsQuery, 
   featuredFaqsQuery,
   pagesQuery,
   pageQuery,
-  navigationQuery,
   testimonialsQuery,
   featuredTestimonialsQuery,
   testimonialsByServiceQuery
@@ -205,13 +206,23 @@ export async function getPage(slug: string) {
   }
 }
 
-export async function getNavigation() {
+export async function getHeaderSettings() {
   try {
-    const data = await client.fetch(navigationQuery)
-    return data || { pages: [], services: [] }
+    const data = await client.fetch(headerSettingsQuery)
+    return data || { navigation: [], ctaButton: null }
   } catch (error) {
-    console.warn('Failed to fetch navigation from Sanity:', error)
-    return { pages: [], services: [] }
+    console.warn('Failed to fetch header settings from Sanity:', error)
+    return { navigation: [], ctaButton: null }
+  }
+}
+
+export async function getFooterSettings() {
+  try {
+    const data = await client.fetch(footerSettingsQuery)
+    return data || { quickLinks: [], legalLinks: [] }
+  } catch (error) {
+    console.warn('Failed to fetch footer settings from Sanity:', error)
+    return { quickLinks: [], legalLinks: [] }
   }
 }
 

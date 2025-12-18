@@ -5,12 +5,26 @@ export const structure: StructureResolver = (S) =>
   S.list()
     .title("Content")
     .items([
-      // Site Settings (Singleton)
+      // Settings Group
       S.listItem()
         .title("Site Settings")
         .id("siteSettings")
         .child(
           S.document().schemaType("siteSettings").documentId("siteSettings")
+        ),
+
+      S.listItem()
+        .title("Header Settings")
+        .id("headerSettings")
+        .child(
+          S.document().schemaType("headerSettings").documentId("headerSettings")
+        ),
+
+      S.listItem()
+        .title("Footer Settings")
+        .id("footerSettings")
+        .child(
+          S.document().schemaType("footerSettings").documentId("footerSettings")
         ),
 
       S.divider(),

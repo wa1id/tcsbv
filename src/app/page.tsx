@@ -2,7 +2,7 @@ import { client } from '@/sanity/lib/client'
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageBuilder from '@/components/PageBuilder'
-import { getSiteSettings, getNavigation } from "@/sanity/lib/fetch";
+import { getSiteSettings, getHeaderSettings, getFooterSettings } from "@/sanity/lib/fetch";
 
 async function getHomePage() {
   const query = `
@@ -60,17 +60,17 @@ async function getHomePage() {
 }
 
 export default async function Home() {
-  const [page, siteSettings, navigation] = await Promise.all([
+  const [page, siteSettings, headerSettings, footerSettings] = await Promise.all([
     getHomePage(),
     getSiteSettings(),
-    getNavigation()
+    getHeaderSettings(),
+    getFooterSettings()
   ])
 
   if (!page) {
-    // Fallback: show message to create home page in Sanity
     return (
       <>
-        <Navbar siteSettings={siteSettings} navigation={navigation} />
+        <Navbar siteSettings={siteSettings} headerSettings={headerSettings} />
         <main className="min-h-screen flex items-center justify-center bg-cream">
           <div className="text-center p-8">
             <h1 className="text-4xl font-bold text-orange mb-4">Welcome to TCSBV</h1>
@@ -85,18 +85,18 @@ export default async function Home() {
             </a>
           </div>
         </main>
-        <Footer siteSettings={siteSettings} />
+        <Footer siteSettings={siteSettings} footerSettings={footerSettings} />
       </>
     )
   }
 
   return (
     <>
-      <Navbar siteSettings={siteSettings} navigation={navigation} />
+      <Navbar siteSettings={siteSettings} headerSettings={headerSettings} />
       <main className="">
         <PageBuilder blocks={page.pageBuilder || []} siteSettings={siteSettings} />
       </main>
-      <Footer siteSettings={siteSettings} />
+      <Footer siteSettings={siteSettings} footerSettings={footerSettings} />
     </>
   );
 }

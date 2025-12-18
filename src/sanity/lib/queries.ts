@@ -13,6 +13,54 @@ export const siteSettingsQuery = groq`
   }
 `
 
+// Header Settings Query
+export const headerSettingsQuery = groq`
+  *[_type == "headerSettings"][0] {
+    navigation[] {
+      title,
+      linkType,
+      internalLink-> { slug },
+      externalUrl,
+      children[] {
+        title,
+        linkType,
+        internalLink-> { slug },
+        externalUrl
+      }
+    },
+    ctaButton {
+      enabled,
+      text,
+      linkType,
+      internalLink-> { slug },
+      externalUrl
+    }
+  }
+`
+
+// Footer Settings Query
+export const footerSettingsQuery = groq`
+  *[_type == "footerSettings"][0] {
+    aboutText,
+    quickLinks[] {
+      title,
+      linkType,
+      internalLink-> { slug },
+      externalUrl
+    },
+    legalLinks[] {
+      title,
+      linkType,
+      internalLink-> { slug },
+      externalUrl
+    },
+    copyrightText,
+    showNewsletter,
+    newsletterTitle,
+    newsletterDescription
+  }
+`
+
 // All Services Query
 export const servicesQuery = groq`
   *[_type == "service"] | order(order asc, title asc) {
@@ -138,16 +186,5 @@ export const testimonialsByServiceQuery = groq`
     rating,
     image,
     dateGiven
-  }
-`
-
-// Navigation Links Query (for dynamic navigation)
-export const navigationQuery = groq`
-  {
-    "pages": *[_type == "page" && !seo.noIndex] | order(title asc) {
-      title,
-      slug
-    },
-    "services": []
   }
 `
