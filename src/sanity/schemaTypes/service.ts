@@ -91,18 +91,6 @@ export const service = defineType({
       ],
     }),
     defineField({
-      name: 'order',
-      title: 'Display Order',
-      type: 'number',
-      initialValue: 0,
-    }),
-    defineField({
-      name: 'featured',
-      title: 'Featured Service',
-      type: 'boolean',
-      initialValue: false,
-    }),
-    defineField({
       name: 'detailPage',
       title: 'Detail Page',
       type: 'reference',
@@ -111,11 +99,6 @@ export const service = defineType({
     }),
   ],
   orderings: [
-    {
-      title: 'Display Order',
-      name: 'orderAsc',
-      by: [{ field: 'order', direction: 'asc' }],
-    },
     {
       title: 'Title A-Z',
       name: 'titleAsc',

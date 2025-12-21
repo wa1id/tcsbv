@@ -28,58 +28,13 @@ export const servicesBlock = defineType({
       ],
     }),
     defineField({
-      name: 'layout',
-      title: 'Layout Style',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'Grid', value: 'grid' },
-          { title: 'Carousel', value: 'carousel' },
-          { title: 'List', value: 'list' },
-        ],
-      },
-      initialValue: 'grid',
+      name: 'numberOfServicesToShow',
+      title: 'Number of Services to Show',
+      type: 'number',
+      description: 'How many services to display (leave empty to show all)',
+      validation: (Rule) => Rule.min(1),
     }),
-    defineField({
-      name: 'allServicesLink',
-      title: 'All Services Link',
-      type: 'object',
-      description: 'Link to the page showing all services',
-      fields: [
-        defineField({
-          name: 'text',
-          title: 'Button Text',
-          type: 'string',
-          initialValue: 'Bekijk alle diensten',
-        }),
-        defineField({
-          name: 'linkType',
-          title: 'Link Type',
-          type: 'string',
-          options: {
-            list: [
-              { title: 'Internal Page', value: 'internal' },
-              { title: 'External URL', value: 'external' },
-            ],
-          },
-          initialValue: 'internal',
-        }),
-        defineField({
-          name: 'internalLink',
-          title: 'Internal Page',
-          type: 'reference',
-          to: [{ type: 'page' }],
-          hidden: ({ parent }) => parent?.linkType !== 'internal',
-        }),
-        defineField({
-          name: 'externalUrl',
-          title: 'External URL',
-          type: 'url',
-          hidden: ({ parent }) => parent?.linkType !== 'external',
-        }),
-      ],
-    }),
-  ],
+    ],
   preview: {
     select: {
       title: 'title',

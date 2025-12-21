@@ -26,12 +26,7 @@ async function getHomePage() {
             slug
           }
         },
-        allServicesLink {
-          text,
-          linkType,
-          internalLink-> { slug },
-          externalUrl
-        },
+        numberOfServicesToShow,
         services[]-> {
           _id,
           title,

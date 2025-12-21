@@ -63,7 +63,7 @@ export const footerSettingsQuery = groq`
 
 // All Services Query
 export const servicesQuery = groq`
-  *[_type == "service"] | order(order asc, title asc) {
+  *[_type == "service"] | order(title asc) {
     _id,
     title,
     slug,
@@ -72,8 +72,7 @@ export const servicesQuery = groq`
     image,
     features,
     price,
-    order,
-    featured
+    detailPage-> { slug }
   }
 `
 
@@ -90,7 +89,7 @@ export const serviceQuery = groq`
     features,
     price,
     seo,
-    featured
+    detailPage-> { slug }
   }
 `
 

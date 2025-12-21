@@ -22,12 +22,7 @@ async function getPage(slug: string) {
           _type,
           _key,
           ...,
-          allServicesLink {
-            text,
-            linkType,
-            internalLink-> { slug },
-            externalUrl
-          },
+          numberOfServicesToShow,
           services[]-> {
             _id,
             title,
