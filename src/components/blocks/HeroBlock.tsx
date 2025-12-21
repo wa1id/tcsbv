@@ -103,7 +103,7 @@ function DefaultHero({ data }: { data: HeroBlockProps['data'] }) {
             </p>
           )}
           {data.description && (
-            <p className="text-cream/80 text-lg mb-8 max-w-2xl mx-auto">
+            <p className="text-cream text-lg mb-8 max-w-2xl mx-auto">
               {data.description}
             </p>
           )}
