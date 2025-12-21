@@ -102,6 +102,13 @@ export const service = defineType({
       type: 'boolean',
       initialValue: false,
     }),
+    defineField({
+      name: 'detailPage',
+      title: 'Detail Page',
+      type: 'reference',
+      to: [{ type: 'page' }],
+      description: 'Link to the detail page for this service',
+    }),
   ],
   orderings: [
     {

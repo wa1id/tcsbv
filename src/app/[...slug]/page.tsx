@@ -22,6 +22,12 @@ async function getPage(slug: string) {
           _type,
           _key,
           ...,
+          allServicesLink {
+            text,
+            linkType,
+            internalLink-> { slug },
+            externalUrl
+          },
           services[]-> {
             _id,
             title,
@@ -29,7 +35,8 @@ async function getPage(slug: string) {
             price,
             features,
             slug,
-            image
+            image,
+            detailPage-> { slug }
           },
           testimonials[]-> {
             _id,

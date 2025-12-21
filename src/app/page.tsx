@@ -26,6 +26,12 @@ async function getHomePage() {
             slug
           }
         },
+        allServicesLink {
+          text,
+          linkType,
+          internalLink-> { slug },
+          externalUrl
+        },
         services[]-> {
           _id,
           title,
@@ -33,7 +39,8 @@ async function getHomePage() {
           price,
           features,
           slug,
-          image
+          image,
+          detailPage-> { slug }
         },
         testimonials[]-> {
           _id,
